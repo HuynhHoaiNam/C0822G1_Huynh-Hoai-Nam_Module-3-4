@@ -22,3 +22,6 @@ body{
 #card3 {
     color: red;
 }
+a:visited{
+    color: blue;
+}
