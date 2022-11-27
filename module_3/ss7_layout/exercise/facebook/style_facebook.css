@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+}
+
+#head {
+    background: deepskyblue;
+    height: 70px;
+    width: 100%;
+}
+#sidebar{
+ background: wheat;
+    height: 700px;
+    width: 15%;
+    float: left;
+}
+#main {
+    background: lightyellow;
+    height: 700px;
+    width: 45%;
+    margin: auto;
+    float: left;
+}
+#footer{
+    background: wheat;
+    height: 700px;
+    width: 15%;
+    float: left;
+}
+#sidebar #main #footer{
+    margin: auto;
+}

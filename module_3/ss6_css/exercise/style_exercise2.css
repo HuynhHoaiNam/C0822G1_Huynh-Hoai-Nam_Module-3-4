@@ -1,0 +1,24 @@
+p {
+    text-indent: 50px; /*căn lề*/
+    font-size: 20px; /*kích thước chữ*/
+}
+
+h1{
+    border-bottom: 2px solid gray /*đường kẻ ngang*/;
+
+}
+body{
+    width: 500px;
+    text-align: justify;
+}
+#card1 {
+    color: deepskyblue;
+}
+
+#card2 {
+    color: red;
+}
+
+#card3 {
+    color: red;
+}

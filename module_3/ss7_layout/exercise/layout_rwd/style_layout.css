@@ -1,0 +1,113 @@
+body {
+    font-family: Arial;
+}
+
+#menu {
+    height: 50px;
+    padding: 0;
+    margin: 0;
+    background-color: dimgrey;
+    border: 2px solid darkslateblue;
+}
+
+#menu ul, #menu li {
+    padding: 0;
+    margin: 0;
+}
+
+#menu li {
+    position: relative;
+    float: left;
+    list-style: none;/*thiết lập kiểu danh sách*/
+    margin: 0;
+    padding: 0;
+}
+
+#menu li a {
+    width: 100px;
+    height: 50px;
+    display: block;
+    text-decoration: none;/*thuộc tính gạch chân*/
+    text-align: center;
+    line-height: 50px;/*khoảng cách giữa các dòng*/
+    background-color: dimgrey;
+    color: white;
+}
+
+#menu ul ul li a {
+    width: 200px;
+    text-align: left;/*sắp xếp theo chiều ngang*/
+    padding-left: 10px;
+}
+
+#menu li a:hover {
+    background-color: black;
+}
+
+#menu ul ul {
+    position: absolute;
+    top: 50px;
+    left: 15px;
+    visibility: hidden;/*thành phàn ko đc nhìn thấy*/
+}
+
+#menu ul li:hover ul {
+    visibility: visible;/*thành phần đc nhìn thấy dạng mặc định*/
+}
+
+.sidebarleft {
+    text-align: center;
+    background: whitesmoke;
+    height: 600px;
+    width: 20%;
+    float: left;
+}
+.sidebarleft ul {
+    list-style: none;
+}.sidebarleft ul li {
+    margin-top: 20px;
+ }
+.main{
+    background: white;
+    height: 600px;
+    width: 60%;
+    float: left;
+    border-bottom: 2px solid grey;
+}
+div p{
+    border-bottom: 1px solid grey;
+    /*margin: auto;*/
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    /*position: relative;left: 20px;!*căn chỉnh vị trí*!*/
+}
+.sidebarright {
+    background: whitesmoke;
+    height: 600px;
+    width: 20%;
+    float: left;
+}
+.footer{
+    background: grey;
+    height: 50px;
+    width: 100%;
+    float: left;
+}
+.id1{
+    border-style: groove;
+    height: 60px;
+    width: 160px;
+    border-radius: 5px;
+    list-style: none;
+    text-align: center;
+    line-height: 60px;/*căn chữ vào giữa*/
+    margin-top: 35px;/*căn chỉnh giữa hai ô*/
+}
+.id1:hover{
+    background: red;
+}
+
+.footer #ftdefind{
+    padding: 0; margin: 0;text-align: center; line-height: 50px
+}
