@@ -1,7 +1,7 @@
-DROP database `furama_resort_web`;
-CREATE DATABASE `furama_resort_web`;
+DROP database `furama_resort_web_C08`;
+CREATE DATABASE `furama_resort_web_C08`;
 
-USE `furama_resort_web`;
+USE `furama_resort_web_C08`;
 
 
 
@@ -47,13 +47,15 @@ CREATE TABLE employee (
     address VARCHAR(45),
     position_id INT,
     FOREIGN KEY (position_id)
-        REFERENCES `position` (id),
+        REFERENCES `position` (id)
+        on delete cascade,
     education_degree_id INT,
     FOREIGN KEY (education_degree_id)
-        REFERENCES education_degree (id),
+        REFERENCES education_degree (id) on delete cascade,
     devision_id INT,
     FOREIGN KEY (devision_id)
         REFERENCES devision (id)
+        on delete cascade
   --   user_name VARCHAR(255),
 --     foreign key (user_name) references `user`(user_name)
 );
@@ -76,6 +78,7 @@ CREATE TABLE customer -- `khach_hang`
     customer_type_id INT,
     FOREIGN KEY (customer_type_id)
         REFERENCES customer_type (id)
+        on delete cascade
 );
 
 CREATE TABLE facility_type -- `loai_dich_vu` 
@@ -101,10 +104,10 @@ CREATE TABLE facility (
     facility_free TEXT,
     rent_type_id INT,
     FOREIGN KEY (rent_type_id)
-        REFERENCES rent_type (id),
+        REFERENCES rent_type (id) on delete cascade,
         facility_type_id INT,
     FOREIGN KEY (facility_type_id)
-        REFERENCES facility_type (id)
+        REFERENCES facility_type (id) on delete cascade
 );
 CREATE TABLE attach_facility -- `dich_vu_di_kem` 
 (
@@ -122,13 +125,13 @@ CREATE TABLE contract -- `hop_dong`
     deposit DOUBLE,
     employee_id INT,
     FOREIGN KEY (employee_id)
-        REFERENCES employee (id),
+        REFERENCES employee (id) on delete cascade,
     customer_id INT,
     FOREIGN KEY (customer_id)
-        REFERENCES customer (id),
+        REFERENCES customer (id) on delete cascade,
     facility_id INT,
     FOREIGN KEY (facility_id)
-        REFERENCES facility (id)
+        REFERENCES facility (id) on delete cascade
 );
 
 CREATE TABLE contract_detail -- `hop_dong_chi_tiet` 
@@ -136,21 +139,21 @@ CREATE TABLE contract_detail -- `hop_dong_chi_tiet`
     id INT PRIMARY KEY,
     contract_id INT,
     FOREIGN KEY (contract_id)
-        REFERENCES contract (id),
+        REFERENCES contract (id) on delete cascade,
     attach_facility_id INT,
     FOREIGN KEY (attach_facility_id)
-        REFERENCES attach_facility (id),
+        REFERENCES attach_facility (id) on delete cascade,
     quantity INT
 );
 
 
+select * from customer;
+-- select * from customer where `name` like '% Hào';
+-- update customer set name="Nguyen Van Vu", date_of_birth="1992-08-08", gender=1, id_card="021353568", phone_number="0964523458", address="23 Nguyễn Hoàng, Đà Nẵng", email="vu@gmail.com",customer_type_id="2" where id="3";
 
-select * from customer where `name` like '% Hào';
-update customer set name="Nguyen Van Vu", date_of_birth="1992-08-08", gender=1, id_card="021353568", phone_number="0964523458", address="23 Nguyễn Hoàng, Đà Nẵng", email="vu@gmail.com",customer_type_id="2" where id="3";
+--  delete from customer where id = 8;
+-- select * from customer where  `name` like '% Hào';
 
- delete from customer where id = 8;
-select * from customer where  `name` like '% Hào';
+-- ALTER DATABASE furama_resort CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-ALTER DATABASE furama_resort CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-select c.*, ct.`name` as customer_type_name from customer c join customer_type ct on c.customer_type_id = ct.id where c.name like '% Hào' and email like lk and address like adda;
+-- select c.*, ct.`name` as customer_type_name from customer c join customer_type ct on c.customer_type_id = ct.id where c.name like '% Hào' and email like lk and address like adda;

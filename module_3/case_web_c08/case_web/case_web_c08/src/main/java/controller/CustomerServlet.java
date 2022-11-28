@@ -1,0 +1,116 @@
+package controller;
+
+import model.Customer;
+import model.CustomerType;
+import service.ICustomerService;
+import service.ICustomerTypeService;
+import service.impl.CustomerService;
+import service.impl.CustomerTypeService;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+@WebServlet(name = "CustomerServlet", urlPatterns = "/furama")
+public class CustomerServlet extends HttpServlet {
+    private ICustomerService customerService= new CustomerService();
+    private ICustomerTypeService customerTypeService= new CustomerTypeService();
+    private List<Customer> customerList = new ArrayList<>();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action==null){
+            action="";
+        }
+        switch (action){
+            case "create":
+                create(request,response);
+                break;
+            case "update":
+                update(request,response);
+                break;
+            case"delete":
+                delete(request,response);
+                break;
+            case "search":
+                search(request,response);
+                break;
+
+        }
+
+    }
+
+
+    private void search(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    private void delete(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    private void update(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    private void create(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        String action = request.getParameter("action");
+        if (action==null){
+            action="";
+        }
+        switch (action){
+            case "create":
+                showFormCreate(request,response);
+                break;
+            case "update":
+                showFormUpdate(request,response);
+                break;
+            case "search":
+                break;
+            case "listCustomer":
+                showFormList(request,response);
+                break;
+            default:
+                showHome(request,response);
+                break;
+        }
+    }
+
+    private void showHome(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            request.getRequestDispatcher("view/home.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showFormList(HttpServletRequest request, HttpServletResponse response) {
+        List<Customer> customerList =customerService.listCustomer();
+        request.setAttribute("customerList",customerList);
+        List<CustomerType> customerTypeList =customerTypeService.listCustomerType();
+        request.setAttribute("customerTypeList",customerTypeList);
+        try {
+            request.getRequestDispatcher("view/customer/list_customer.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showFormUpdate(HttpServletRequest request, HttpServletResponse response) {
+    }
+
+    private void showFormCreate(HttpServletRequest request, HttpServletResponse response) {
+    }
+}
