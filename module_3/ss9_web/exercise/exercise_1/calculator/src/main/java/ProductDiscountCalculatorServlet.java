@@ -5,8 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CalculatorServlet", urlPatterns = "/calculator")
-public class CalculatorServlet extends HttpServlet {
+@WebServlet(name = "ProductDiscountCalculatorServlet", urlPatterns = "/product-discount-calculator")
+public class ProductDiscountCalculatorServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         double valueFirst = Double.parseDouble(request.getParameter("ListPrice"));
         double valueSecond = Double.parseDouble(request.getParameter("DiscountPercent"));
@@ -14,9 +14,7 @@ public class CalculatorServlet extends HttpServlet {
         request.setAttribute("result", result);
         String describe = request.getParameter("Describe");
         request.setAttribute("describe",describe);
-//        request.getRequestDispatcher("result.jsp").forward(request, response);
         request.getRequestDispatcher("result.jsp").forward(request, response);
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

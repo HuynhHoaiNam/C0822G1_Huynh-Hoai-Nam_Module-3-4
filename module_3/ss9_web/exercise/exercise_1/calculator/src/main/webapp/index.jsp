@@ -11,7 +11,7 @@
     <title>$Title$</title>
   </head>
   <body>
-  <form action="/calculator" method="post">
+  <form action="/product-discount-calculator" method="post">
     <pre>Mô tả của sản phẩm:     <input type="text" name="Describe"></pre>
     <pre>Giá Niêm Yết Sản Phẩm:  <input type="text" name="ListPrice"></pre>
     <pre>Giá Chiết Khấu:         <input type="text" name="DiscountPercent"></pre>
