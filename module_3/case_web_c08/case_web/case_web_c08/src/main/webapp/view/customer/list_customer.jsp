@@ -56,18 +56,18 @@
                     <!--DropDowns-->
                     <div class="btn-group">
                         <button type="button" class="btn btn-info">
-                            <a>Trang Chủ</a>
+                            <a class="nav-link active a" aria-current="page" href="/furama" >Trang Chủ</a>
                         </button>
                     </div>
                     <!--DropDowns2-->
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Nhân Viên</a>
+                            <a class="nav-link active a" aria-current="page" href="/furama?action=listCustomer">Khách Hàng</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Khách Hàng</a>
+                            <a>Nhân Viên</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
@@ -82,8 +82,9 @@
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <form class="d-flex" action="/furama?action=search" method="post">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Nhập Tên" name="nameInput">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Nhập Địa Chỉ" name="addressInput">
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
                 </div>
@@ -111,6 +112,7 @@
             </tr>
             </thead>
             <tbody>
+<%--            thêm id và bỏ hidden đi--%>
             <c:forEach var="listCustomer" items="${customerList}" varStatus="status">
             <tr>
                 <th scope="row">${status.count}</th>
@@ -129,35 +131,14 @@
                 <td>${listCustomer.getEmail()}</td>
                 <td>${listCustomer.getAddress()}</td>
                 <td>
-                    <button class="btn btn-success">Thêm</button>
-                </td>
-                <td>
                     <button class="btn btn-warning">Sửa</button>
                 </td>
                 <td><!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                        Xoá
+                    <button  type="button"  onclick="idRemove('${listCustomer.getId()}','${listCustomer.getName()}') "
+                             class="btn btn-danger" data-bs-toggle="modal"
+                             data-bs-target="#exampleRemove">
+                        Xoá
                     </button>
-                    <!-- Modal -->
-                    <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title text-black" >Yêu Cầu Xoá Khách Hàng</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body text-black">
-                                    Bạn có chắc chắn muốn Xoá
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Xoá</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </td>
             </tr>
             </c:forEach>
@@ -202,5 +183,44 @@
         </div>
     </div>
 </div>
+
+
+
+<%--    Modal Xoá--%>
+<div class="modal fade" id="exampleRemove" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yêu Cầu Xoá Khách Hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn chắc chắn muốn xoá?
+                <%--                    nameInput của funtion bên dươi--%>
+                <span id="nameInput"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ
+                </button>
+                <form action="/furama?action=delete" method="post">
+                    <%-- name="id" của getParameter("id")--%>
+                    <input type="hidden" name="id" id="idInput">
+                    <button class="btn btn-primary">Xoá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function idRemove(id, name) {
+        document.getElementById("idInput").value = id;
+        document.getElementById("nameInput").innerText=name;
+    }
+</script>
+
 </body>
 </html>

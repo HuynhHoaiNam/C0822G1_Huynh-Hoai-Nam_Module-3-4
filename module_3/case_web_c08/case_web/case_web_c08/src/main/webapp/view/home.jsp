@@ -69,11 +69,6 @@
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Khách Hàng</a>
-                        </button>
-                    </div>
-                    <div class="btn-group" style="margin-left: 30px">
-                        <button type="button" class="btn btn-info">
                             <a>Dịch Vụ</a>
                         </button>
                     </div>

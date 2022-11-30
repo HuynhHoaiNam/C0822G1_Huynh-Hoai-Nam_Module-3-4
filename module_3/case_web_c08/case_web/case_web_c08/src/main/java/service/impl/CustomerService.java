@@ -31,7 +31,7 @@ public class CustomerService implements ICustomerService {
     }
 
     @Override
-    public List<Customer> findCustomer(int id, String name, String address) {
-        return customerRepository.findCustomer(id, name, address);
+    public List<Customer> findCustomer(String name, String address) {
+        return customerRepository.findCustomer(name, address);
     }
 }

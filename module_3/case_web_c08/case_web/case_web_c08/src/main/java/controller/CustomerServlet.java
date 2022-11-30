@@ -41,16 +41,43 @@ public class CustomerServlet extends HttpServlet {
             case "search":
                 search(request,response);
                 break;
-
         }
-
     }
-
 
     private void search(HttpServletRequest request, HttpServletResponse response) {
+        String name= request.getParameter("nameInput");
+        request.setAttribute("nameFind",name);
+        String address=request.getParameter("addressInput");
+        request.setAttribute("addressFind",address);
+
+
+        List<Customer> customerList = customerService.findCustomer(name,address);
+        request.setAttribute("customerList",customerList);
+        List<CustomerType>customerTypeList= customerTypeService.listCustomerType();
+        request.setAttribute("customerTypeList",customerTypeList);
+        try {
+            request.getRequestDispatcher("/view/customer/list_customer.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+
     private void delete(HttpServletRequest request, HttpServletResponse response) {
+        int id= Integer.parseInt(request.getParameter("id"));
+        customerService.delete(id);
+
+        List<Customer> customerList=customerService.listCustomer();
+        request.setAttribute("customerList",customerList);
+        try {
+            request.getRequestDispatcher("/view/customer/list_customer.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void update(HttpServletRequest request, HttpServletResponse response) {
@@ -73,8 +100,9 @@ public class CustomerServlet extends HttpServlet {
             case "update":
                 showFormUpdate(request,response);
                 break;
-            case "search":
-                break;
+//            case "search":
+//                showFormSearch(request,response);
+//                break;
             case "listCustomer":
                 showFormList(request,response);
                 break;
@@ -83,6 +111,28 @@ public class CustomerServlet extends HttpServlet {
                 break;
         }
     }
+
+//    private void showFormSearch(HttpServletRequest request, HttpServletResponse response) {
+//
+//        String name= request.getParameter("nameInput");
+//        request.setAttribute("nameFind",name);
+//        String address=request.getParameter("addressInput");
+//        request.setAttribute("addressFind",address);
+//
+//
+//        List<Customer> customerList = customerService.findCustomer(name,address);
+//        request.setAttribute("customerList",customerList);
+//        List<CustomerType>customerTypeList= customerTypeService.listCustomerType();
+//        request.setAttribute("customerTypeList",customerTypeList);
+//        try {
+//            request.getRequestDispatcher("/view/customer/list_customer.jsp").forward(request,response);
+//        } catch (ServletException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     private void showHome(HttpServletRequest request, HttpServletResponse response) {
         try {

@@ -13,6 +13,6 @@ public interface ICustomerRepository {
 
     boolean delete(int id);
 
-    List<Customer> findCustomer(int id, String name, String address);
+    List<Customer> findCustomer(String name, String address);
 
 }

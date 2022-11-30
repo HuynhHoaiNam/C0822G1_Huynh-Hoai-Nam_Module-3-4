@@ -16,6 +16,5 @@
   </head>
   <body>
   <c:redirect url="/furama"></c:redirect>
-  $END$
   </body>
 </html>

@@ -147,13 +147,8 @@ CREATE TABLE contract_detail -- `hop_dong_chi_tiet`
 );
 
 
-select * from customer;
--- select * from customer where `name` like '% Hào';
--- update customer set name="Nguyen Van Vu", date_of_birth="1992-08-08", gender=1, id_card="021353568", phone_number="0964523458", address="23 Nguyễn Hoàng, Đà Nẵng", email="vu@gmail.com",customer_type_id="2" where id="3";
-
---  delete from customer where id = 8;
--- select * from customer where  `name` like '% Hào';
-
--- ALTER DATABASE furama_resort CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- select c.*, ct.`name` as customer_type_name from customer c join customer_type ct on c.customer_type_id = ct.id where c.name like '% Hào' and email like lk and address like adda;
+select c.*, ct.name as name_type from customer c join customer_type ct on c.customer_type_id=ct.id ;
+select * from customer_type;
+select * from customer where name like '%Hào' and address like '%Đa Nang';
+select c.*, ct.name as name_type from customer c join customer_type ct on c.customer_type_id=ct.id where c.name like '%Hao' and c.address like '%Đa Nang';
+delete  from customer where id = 11;
