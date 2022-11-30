@@ -13,6 +13,5 @@
 <body>
 <h3>Mô tả sản phẩm: ${describe}</h3>
 <h1>Kết Quả Là: ${result}</h1>
-<%--<a href="index.jsp"></a>--%>
 </body>
 </html>
