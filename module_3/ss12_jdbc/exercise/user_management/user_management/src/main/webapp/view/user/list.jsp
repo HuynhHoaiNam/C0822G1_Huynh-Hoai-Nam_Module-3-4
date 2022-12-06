@@ -68,8 +68,8 @@
         <%--        <th>ID</th>--%>
         <th>Tên</th>
         <th>Email</th>
-        <th>Tên Nước</th>
         <th>Sửa</th>
+        <th>Xoá</th>
     </tr>
     <c:forEach items="${userList}" var="user" varStatus="status">
         <tr>
