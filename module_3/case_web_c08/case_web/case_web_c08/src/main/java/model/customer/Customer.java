@@ -1,4 +1,4 @@
-package model;
+package model.customer;
 
 public class Customer {
     private int id;
@@ -25,7 +25,8 @@ public class Customer {
         this.customerType = customerType;
     }
 
-    public Customer(int id, String name, String dateOfBirth, boolean gender, String idCard, String phoneNumber, String address, String email, int customerTypeId) {
+    public Customer(int id, String name, String dateOfBirth, boolean gender, String idCard, String phoneNumber,
+                    String address, String email, int customerTypeId) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -46,20 +47,6 @@ public class Customer {
         this.address = address;
         this.email = email;
         this.customerTypeId = customerTypeId;
-    }
-
-    public Customer(int id, String name, String dateOfBirth, boolean gender, String idCard,
-                    String phoneNumber, String address, String email, int customerTypeId, CustomerType customerType) {
-        this.id = id;
-        this.name = name;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-        this.idCard = idCard;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.email = email;
-        this.customerTypeId = customerTypeId;
-        this.customerType = customerType;
     }
 
     public int getId() {

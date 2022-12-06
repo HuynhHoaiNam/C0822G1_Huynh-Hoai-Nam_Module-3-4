@@ -10,8 +10,65 @@
 <html>
 <head>
     <title>Trang Thêm Mới Khách Hàng</title>
+    <link rel="stylesheet" href="/view/customer/styleCustomer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 <body>
-
+<h1>Thêm Mới Người Dùng</h1>
+<c:if test="${mess!=null}">
+    <span style="color: green">${mess}</span>
+</c:if>
+<button class="btn btn-warning"><a class="thea" href="/furama?action=listCustomer">Quay Lại Trang Danh Sách</a></button>
+<form action="/furama?action=create" method="post">
+    <table class="table table-success table-striped container">
+        <tr>
+            <th>Mã Khách Hàng:</th>
+            <td><select name="customerTypeId" >
+                <c:forEach var="cusType" items="${customerTypeList}">
+                    <%--value dùng để chuyển đỏi từ mã tên sang mã id--%>
+                    <option value="${cusType.getId()}">
+<%--                        name(custoerType)--%>
+                            ${cusType.getName()}</option>
+                </c:forEach>
+            </select></td>
+        </tr>
+        <tr>
+            <th>Tên Khách Hàng:</th>
+            <td><input type="text" name="name" ></td>
+        </tr>
+        <tr>
+            <th>Ngày Sinh:</th>
+            <td><input type="date" name="dateOfBirth"></td>
+        </tr>
+        <tr>
+            <th>Giới Tính:</th>
+            <td><input type="radio" name="gender" size="45" value="true" ${customer.isGender()==true?"checked":""} >Nam
+                <input type="radio" name="gender" size="45" value="false" ${customer.isGender()==false?"checked":""} >Nữ
+            </td>
+        </tr>
+        <tr>
+            <th>Số cmnd:</th>
+            <td><input type="text" name="idCard"></td>
+        </tr>
+        <tr>
+            <th>Số đt:</th>
+            <td><input type="text" name="phoneNumber"></td>
+        </tr>
+        <tr>
+            <th>Email:</th>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <th>Địa Chỉ:</th>
+            <td><input type="text" name="address"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><button type="submit"style="background-color: lightskyblue; margin: auto">Update</button></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

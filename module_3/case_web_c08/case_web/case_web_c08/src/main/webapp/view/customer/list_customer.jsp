@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>Trang Danh Sách Khách Hàng</title>
+    <link rel="stylesheet" href="/view/customer/styleCustomer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div>
@@ -56,13 +58,13 @@
                     <!--DropDowns-->
                     <div class="btn-group">
                         <button type="button" class="btn btn-info">
-                            <a class="nav-link active a" aria-current="page" href="/furama" >Trang Chủ</a>
+                            <a class="thea nav-link active a " aria-current="page" href="/furama" >Trang Chủ</a>
                         </button>
                     </div>
                     <!--DropDowns2-->
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a class="nav-link active a" aria-current="page" href="/furama?action=listCustomer">Khách Hàng</a>
+                            <a class="thea nav-link active a " aria-current="page" href="/furama?action=listCustomer">Khách Hàng</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
@@ -83,8 +85,8 @@
                 </div>
                 <div class="col-lg-3">
                     <form class="d-flex" action="/furama?action=search" method="post">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Nhập Tên" name="nameInput">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Nhập Địa Chỉ" name="addressInput">
+                        <input class="form-control me-2" type="search" placeholder="Tên" aria-label="Nhập Tên" name="nameInput">
+                        <input class="form-control me-2" type="search" placeholder="Địa Chỉ" aria-label="Nhập Địa Chỉ" name="addressInput">
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
                 </div>
@@ -95,8 +97,9 @@
     <!--    Main Content List-->
     <!--Danh Sách Khách Hàng-->
     <div class="col-lg-12" style="text-align: center;background-color: lightyellow"><h1 style="margin: 0">Danh Sách Khách Hàng</h1></div>
-    <div>
-        <table class="table table-dark table-striped">
+    <button class="btn btn-success"><a style="text-decoration: none;color: white" href="/furama?action=create">Them Moi</a></button>
+    <div class="col-lg-12">
+        <table class="table table-dark table-striped table-bordered" style="width: 100%" id='tableStudent'>
             <thead>
             <tr>
                 <th scope="col">STT</th>
@@ -108,16 +111,16 @@
                 <th scope="col">Số đt</th>
                 <th scope="col">Email</th>
                 <th scope="col">Địa Chỉ</th>
-                <th colspan="3" style="text-align: center">Chức Năng</th>
+                <th scope="col">Chức Năng</th>
+                <th scope="col">Chức Năng</th>
             </tr>
             </thead>
             <tbody>
 <%--            thêm id và bỏ hidden đi--%>
             <c:forEach var="listCustomer" items="${customerList}" varStatus="status">
             <tr>
-                <th scope="row">${status.count}</th>
+                <td>${status.count}</td>
                 <td>${listCustomer.getCustomerType().getName()}</td>
-<%--                <td>Otto</td>--%>
                 <td>${listCustomer.getName()}</td>
                 <td>${listCustomer.getDateOfBirth()}</td>
                 <td>   <label> <c:if test="${listCustomer.isGender()}">
@@ -131,7 +134,7 @@
                 <td>${listCustomer.getEmail()}</td>
                 <td>${listCustomer.getAddress()}</td>
                 <td>
-                    <button class="btn btn-warning">Sửa</button>
+                    <button class="btn btn-warning"><a href="/furama?action=update&id=${listCustomer.getId()}">Sửa</a></button>
                 </td>
                 <td><!-- Button trigger modal -->
                     <button  type="button"  onclick="idRemove('${listCustomer.getId()}','${listCustomer.getName()}') "
@@ -199,7 +202,7 @@
             <div class="modal-body">
                 Bạn chắc chắn muốn xoá?
                 <%--                    nameInput của funtion bên dươi--%>
-                <span id="nameInput"></span>
+                <span><h3 id="nameInput"></h3></span>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ
@@ -217,10 +220,24 @@
 
 <script>
     function idRemove(id, name) {
+        // value dùng cho input
         document.getElementById("idInput").value = id;
+        // innerText dùng cho ko phải input
         document.getElementById("nameInput").innerText=name;
     }
 </script>
 
+<script src="jquery/jquery-3.5.1.min.js"></script>
+<script src="datatables/js/jquery.dataTables.min.js"></script>
+<script src="datatables/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#tableStudent').dataTable( {
+            "dom": 'lrtip',
+            "lengthChange": false,
+            "pageLength": 5
+        } );
+    } );
+</script>
 </body>
 </html>

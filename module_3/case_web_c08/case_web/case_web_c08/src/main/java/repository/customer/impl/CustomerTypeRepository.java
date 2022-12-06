@@ -1,10 +1,8 @@
-package repository.impl;
+package repository.customer.impl;
 
-import model.CustomerType;
-import repository.BaseRepository;
-import repository.ICustomerRepository;
-import repository.ICustomerTypeRepository;
-import service.ICustomerTypeService;
+import model.customer.CustomerType;
+import repository.customer.BaseRepository;
+import repository.customer.ICustomerTypeRepository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
