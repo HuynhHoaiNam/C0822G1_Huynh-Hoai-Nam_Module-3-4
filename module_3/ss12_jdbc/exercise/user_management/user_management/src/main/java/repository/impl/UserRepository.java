@@ -4,27 +4,24 @@ import model.User;
 import repository.BaseRepository;
 import repository.IUserRepository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository implements IUserRepository {
-    private final String SELECT_ALL = "select * from users order by country;";
+    private final String SELECT_ALL = "call p_select;";
     private final String INSERT_INTO = "insert into users(name,email,country)values(?,?,?);";
     private final String FIND_BY_COUNTRY = "select*from users where country like ?;";
-    private final String UPDATE_USER = "update users set name = ?,email= ?, country =? where id = ?";
-    private final String DELETE_USER ="delete from users where id = ?;";
+    private final String UPDATE_USER = "call p_update(?,?,?,?);";
+    private final String DELETE_USER = "call p_delete(?);";
 
     @Override
     public List<User> selectAll() {
         List<User> userList = new ArrayList<>();
         Connection connection = BaseRepository.getConnectDB();
         try {
-            PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
-            ResultSet resultSet = ps.executeQuery();
+            CallableStatement cl = connection.prepareCall(SELECT_ALL);
+            ResultSet resultSet = cl.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String name = resultSet.getString("name");
@@ -60,12 +57,13 @@ public class UserRepository implements IUserRepository {
         Connection connection = BaseRepository.getConnectDB();
         boolean rowUpdated;
         try {
-            PreparedStatement statement = connection.prepareStatement(UPDATE_USER);
+            CallableStatement cl = connection.prepareCall(UPDATE_USER);
 //            statement.setInt(1, user.getId());
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getEmail());
-            statement.setString(3, user.getCountry());
-            rowUpdated = statement.executeUpdate() > 0;
+            cl.setString(1, user.getName());
+            cl.setString(2, user.getEmail());
+            cl.setString(3, user.getCountry());
+            cl.setInt(4, user.getId());
+            rowUpdated = cl.executeUpdate() > 0;
             return rowUpdated;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -78,9 +76,9 @@ public class UserRepository implements IUserRepository {
         boolean rowDelete;
         Connection connection = BaseRepository.getConnectDB();
         try {
-            PreparedStatement statement = connection.prepareStatement(DELETE_USER);
-            statement.setInt(1, id);
-            rowDelete = statement.executeUpdate() > 0;
+            CallableStatement cl = connection.prepareCall(DELETE_USER);
+            cl.setInt(1, id);
+            rowDelete = cl.executeUpdate() > 0;
             return rowDelete;
 
         } catch (SQLException throwables) {

@@ -69,8 +69,7 @@
         <th>Tên</th>
         <th>Email</th>
         <th>Tên Nước</th>
-        <th>Sua</th>
-        <th>Tên Nước</th>
+        <th>Sửa</th>
     </tr>
     <c:forEach items="${userList}" var="user" varStatus="status">
         <tr>
@@ -78,11 +77,51 @@
                 <%--            <th>${user.id}</th>--%>
             <th>${user.name}</th>
             <th>${user.email}</th>
-            <th>${user.country}</th>
             <th><button><a href="/user?action=update">Sua</a></button></th>
-            <th><button><a href="/user?action=delete">Xoa</a></button></th>
+            <th>
+            <button  type="button"  onclick="idRemove('${userList.id}','${userList.name}') "
+                     class="btn btn-danger" data-bs-toggle="modal"
+                     data-bs-target="#exampleRemove">
+                Xoá
+            </button>
+        </th>
         </tr>
     </c:forEach>
 </table>
+
+<%--    Modal Xoá--%>
+<div class="modal fade" id="exampleRemove" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yêu Cầu Xoá Khách Hàng</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Bạn chắc chắn muốn xoá?
+                <span><h3 id="nameInput"></h3></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ
+                </button>
+                <form action="/furama?action=delete" method="post">
+                    <%-- name="id" của getParameter("id")--%>
+                    <input type="hidden" name="id" id="idInput">
+                    <button class="btn btn-primary">Xoá</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function idRemove(id, name) {
+        document.getElementById("idInput").value = id;
+        document.getElementById("nameInput").innerText=name;
+    }
+</script>
 </body>
 </html>
