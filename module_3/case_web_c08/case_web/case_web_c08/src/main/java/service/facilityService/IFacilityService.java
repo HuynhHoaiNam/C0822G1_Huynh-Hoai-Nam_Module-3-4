@@ -14,4 +14,6 @@ public interface IFacilityService {
     boolean deleteF(int id);
 
     List<Facility> findById(int id);
+
+    List<Facility> findManyField(String facilityName, String standardRoom);
 }

@@ -10,8 +10,11 @@
 <html>
 <head>
     <title>Trang Danh Sách Dịch Vụ</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div>
@@ -56,13 +59,14 @@
                     <!--DropDowns-->
                     <div class="btn-group">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/furama" >Trang Chủ</a>
+                            <a class="thea nav-link active a " aria-current="page" href="/furama">Trang Chủ</a>
                         </button>
                     </div>
                     <!--DropDowns2-->
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/furama?action=listCustomer">Khách Hàng</a>
+                            <a class="thea nav-link active a " aria-current="page" href="/furama?action=listCustomer">Khách
+                                Hàng</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
@@ -82,9 +86,11 @@
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <form class="d-flex" action="/furama?action=search" method="post">
-                        <input class="form-control me-2" type="search" placeholder="Tên" aria-label="Nhập Tên" name="nameInput">
-                        <input class="form-control me-2" type="search" placeholder="Địa Chỉ" aria-label="Nhập Địa Chỉ" name="addressInput">
+                    <form class="d-flex" action="/facility?action=search" method="post">
+                        <input class="form-control me-2" type="search" placeholder="Tên Dịch Vụ"
+                               aria-label="Nhập Tên" name="facilityName">
+                        <input class="form-control me-2" type="search" placeholder="Tiêu Chuẩn Phòng"
+                               aria-label="Tiêu Chuẩn Phòng" name="maxPeople">
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
                 </div>
@@ -94,8 +100,11 @@
 
     <!--    Main Content List-->
     <!--Danh Sách Khách Hàng-->
-    <div class="col-lg-12" style="text-align: center;background-color: lightyellow"><h1 style="margin: 0">Danh Sách Khách Hàng</h1></div>
-    <button class="btn btn-success"><a style="text-decoration: none;color: white" href="/furama?action=create">Them Moi</a></button>
+    <div class="col-lg-12" style="text-align: center;background-color: lightyellow"><h1 style="margin: 0">Danh Sách
+        Dịch Vụ</h1></div>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Thêm Mới
+    </button>
     <div class="col-lg-12">
         <table class="table table-dark table-striped table-bordered" style="width: 100%" id='tableStudent'>
             <thead>
@@ -105,39 +114,53 @@
                 <th scope="col">Diện Tích</th>
                 <th scope="col">Giá</th>
                 <th scope="col">Số Người Tối Đa</th>
+                <th scope="col">Kiểu Thuê</th>
+                <th scope="col">Tên Dịch Vụ</th>
                 <th scope="col">Tiêu Chuẩn Phòng</th>
                 <th scope="col">Mô Tả Tiện Ích Khác</th>
                 <th scope="col">Diện Tích Hồ Bơi</th>
                 <th scope="col">Số Tầng</th>
                 <th scope="col">Dịch Vụ Miễn Phí</th>
                 <th scope="col">Chức Năng</th>
+                <th scope="col">Chức Năng</th>
             </tr>
             </thead>
             <tbody>
-            <%--            thêm id và bỏ hidden đi--%>
-            <c:forEach var="listCustomer" items="${customerList}" varStatus="status">
+            <c:forEach var="facility" items="${facilityList}" varStatus="status">
                 <tr>
                     <td>${status.count}</td>
-                    <td>${listCustomer.getCustomerType().getName()}</td>
-                    <td>${listCustomer.getName()}</td>
-                    <td>${listCustomer.getDateOfBirth()}</td>
-                    <td>   <label> <c:if test="${listCustomer.isGender()}">
-                        Nam</label>
-                        <label></c:if>
-                            <c:if test="${!listCustomer.isGender()}">
-                                Nữ
-                            </c:if></label></td>
-                    <td>${listCustomer.getIdCard()}</td>
-                    <td>${listCustomer.getPhoneNumber()}</td>
-                    <td>${listCustomer.getEmail()}</td>
-                    <td>${listCustomer.getAddress()}</td>
+                    <td>${facility.getName()}</td>
+                    <td>${facility.getArea()}</td>
+                    <td>${facility.getCost()}</td>
+                    <td>${facility.getMaxPeople()}</td>
+                    <td>${facility.getRentType().getName()}</td>
+                    <td>${facility.getFacilityType().getName()}</td>
+                    <td>${facility.getStandardRoom()}</td>
+                    <td>${facility.getDescriptionOtherConvenience()}</td>
+                        <%--                    Diện Tích Hồ Bơi--%>
+                    <c:if test="${facility.getPoolArea() <= 0}">
+                        <td></td>
+                    </c:if>
+                    <c:if test="${facility.getPoolArea() > 0}">
+                        <td>${facility.getPoolArea()}</td>
+                    </c:if>
+                        <%--                    Số Tầng--%>
+                    <c:if test="${facility.getNumberOfFloors()<= 0}">
+                        <td></td>
+                    </c:if>
+                    <c:if test="${facility.getNumberOfFloors()> 0}">
+                        <td>${facility.getNumberOfFloors()}</td>
+                    </c:if>
+                    <td>${facility.getFacilityFree()}</td>
                     <td>
-                        <button class="btn btn-warning"><a href="/furama?action=update&id=${listCustomer.getId()}">Sửa</a></button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">Sửa
+                        </button>
                     </td>
                     <td><!-- Button trigger modal -->
-                        <button  type="button"  onclick="idRemove('${listCustomer.getId()}','${listCustomer.getName()}') "
-                                 class="btn btn-danger" data-bs-toggle="modal"
-                                 data-bs-target="#exampleRemove">
+                        <button type="button" onclick="idRemove('${listCustomer.getId()}','${listCustomer.getName()}')"
+                                class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleRemove">
                             Xoá
                         </button>
                     </td>
@@ -186,14 +209,13 @@
 </div>
 
 
-
 <%--    Modal Xoá--%>
 <div class="modal fade" id="exampleRemove" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Yêu Cầu Xoá Khách Hàng</h5>
+                <h5 class="modal-title" id="exampleModalLabelDelete">Yêu Cầu Xoá Khách Hàng</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
             </div>
@@ -216,26 +238,129 @@
 </div>
 
 
+<%--Modal thêm mới--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelCreate">Thêm Mới Dịch Vụ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <select id="elements" onchange="showValue()">
+                    <option value="1" selected>Villa</option>
+                    <option value="2">House</option>
+                    <option value="3">Room</option>
+                </select>
+                <div id="results"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                <button type="button" class="btn btn-primary">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%--js thêm mới modal--%>
+<script>
+
+    let fom1 = "<form>\n" +
+        "    <p>Tên Dịch Vụ</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"name\"> <br>\n" +
+        "    <p>Diện Tích Sử Dụng</p>\n" +
+        "    <input class=\"form-control\" type=\"email\" name=\"area\">\n" +
+        "    <p>Chi Phí Thuê</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
+        "    <p>Số Người Tối Đa</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
+        "    <p>Kiểu Thuê</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"renTypeName\">\n" +
+        "    <p>Tiêu Chuẩn Phòng</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"standardRoom\">\n" +
+        "    <p>Mô Tả Tiện Nghi Khác</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"descriptionOtherConvenience\">\n" +
+        "    <p>Diện Tích Hồ Bơi</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"poolArea\">\n" +
+        "    <p>Số Tầng</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"numberOfFloors\">\n" +
+        "</form>";
+
+    let fom2 = "<form>\n" +
+        "    <p>Tên Dịch Vụ</p>\n" +
+        "    <input class=\"form-control\" type=\"text\"  name=\"name\"> <br>\n" +
+        "    <p>Diện Tích Sử Dụng</p>\n" +
+        "    <input class=\"form-control\" type=\"email\" name=\"area\">\n" +
+        "    <p>Chi Phí Thuê</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
+        "    <p>Số Người Tối Đa</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
+        "    <p>Kiểu Thuê</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"renTypeName\">\n" +
+        "    <p>Tiêu Chuẩn Phòng</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"standardRoom\">\n" +
+        "    <p>Mô Tả Tiện Nghi Khác</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"descriptionOtherConvenience\">\n" +
+        "    <p>Số Tầng</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"numberOfFloors\">\n" +
+        "</form>";
+
+    let fom3 = "<form>\n" +
+        "    <p>Tên Dịch Vụ</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"name\"> <br>\n" +
+        "    <p>Diện Tích Sử Dụng</p>\n" +
+        "    <input class=\"form-control\" type=\"email\" name=\"area\">\n" +
+        "    <p>Chi Phí Thuê</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
+        "    <p>Số Người Tối Đa</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
+        "    <p>Kiểu Thuê</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"renTypeName\">\n" +
+        "    <p>Dịch Vụ Miễn Phí Đi Kèm</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"facilityFree\">\n" +
+        "</form>";
+
+    document.getElementById("results").innerHTML = fom1;
+
+    function showValue() {
+        var ele = elements.value;
+        if (ele == 1) {
+            document.getElementById("results").innerHTML = fom1;
+        } else if (ele == 2) {
+            document.getElementById("results").innerHTML = fom2;
+        } else {
+            document.getElementById("results").innerHTML = fom3;
+        }
+    }
+</script>
+
+
+<%--js xoá modal--%>
 <script>
     function idRemove(id, name) {
         // value dùng cho input
         document.getElementById("idInput").value = id;
         // innerText dùng cho ko phải input
-        document.getElementById("nameInput").innerText=name;
+        document.getElementById("nameInput").innerText = name;
     }
 </script>
 
+
+<%--js phân trang--%>
 <script src="jquery/jquery-3.5.1.min.js"></script>
 <script src="datatables/js/jquery.dataTables.min.js"></script>
 <script src="datatables/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#tableStudent').dataTable( {
+    $(document).ready(function () {
+        $('#tableStudent').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
             "pageLength": 5
-        } );
-    } );
+        });
+    });
 </script>
+
+
 </body>
 </html>

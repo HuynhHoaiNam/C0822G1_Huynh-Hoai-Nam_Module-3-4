@@ -8,7 +8,7 @@ import service.facilityService.IFacilityService;
 import java.util.List;
 
 public class FacilityService implements IFacilityService {
-    private IFacilityRepository facilityRepository=new FacilityRepository();
+    private IFacilityRepository facilityRepository = new FacilityRepository();
 
     @Override
     public List<Facility> selectAll() {
@@ -33,5 +33,10 @@ public class FacilityService implements IFacilityService {
     @Override
     public List<Facility> findById(int id) {
         return facilityRepository.findById(id);
+    }
+
+    @Override
+    public List<Facility> findManyField(String facilityName, String standardRoomFind) {
+        return facilityRepository.findManyField(facilityName, standardRoomFind);
     }
 }

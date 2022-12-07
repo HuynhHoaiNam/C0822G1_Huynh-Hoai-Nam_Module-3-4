@@ -23,8 +23,8 @@ private final String SELECT_ALL_CT="select * from customer_type;";
             ResultSet resultSet=ps.executeQuery();
             while (resultSet.next()){
                 int id= resultSet.getInt("id");
-                String nameCTType=resultSet.getString("name");
-                CustomerType customerType= new CustomerType(id,nameCTType);
+                String name=resultSet.getString("name");
+                CustomerType customerType= new CustomerType(id,name);
                 customerTypeList.add(customerType);
             }
         } catch (SQLException throwables) {

@@ -29,9 +29,8 @@
                 <th>Mã Loại Khách:</th>
                 <td><select name="customerTypeId">
                     <c:forEach var="cusType" items="${customerTypeList}">
-                        <%-- value dùng để chuyển đỏi từ mã tên sang mã id--%>
                         <option value="${cusType.getId()}" ${cusType.getId() == customer.getCustomerTypeId() ? 'selected' : ''}>
-                                ${customer.getCustomerType().getName()}</option>
+                                ${cusType.getName()}</option>
                     </c:forEach>
                 </select></td>
             </tr>
@@ -46,8 +45,7 @@
             <tr>
                 <th>Giới Tính:</th>
                 <td><input type="radio" name="gender" size="45" value="true" ${customer.isGender()==true?"checked":""} >Nam
-                    <input type="radio" name="gender" size="45"
-                           value="false" ${customer.isGender()==false?"checked":""} >Nữ
+                    <input type="radio" name="gender" size="45" value="false" ${customer.isGender()==false?"checked":""} >Nữ
                 </td>
             </tr>
             <tr>

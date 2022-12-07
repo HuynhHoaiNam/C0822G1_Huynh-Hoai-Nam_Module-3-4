@@ -74,7 +74,7 @@
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Dịch Vụ</a>
+                            <a class="thea nav-link active a " aria-current="page" href="/facility">Dịch Vụ</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
