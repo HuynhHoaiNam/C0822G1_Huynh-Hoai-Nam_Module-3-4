@@ -69,7 +69,7 @@
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Nhân Viên</a>
+                            <a class="thea nav-link active a " aria-current="page" href="/employee">Nhân Viên</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">

@@ -104,7 +104,7 @@
         Dịch Vụ</h1></div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Thêm Mới
-    </button>
+    </button><c:if test="${mess!=null}"><span>${mess}</span></c:if>
     <div class="col-lg-12">
         <table class="table table-dark table-striped table-bordered" style="width: 100%" id='tableStudent'>
             <thead>
@@ -265,18 +265,18 @@
 
 <%--js thêm mới modal--%>
 <script>
-
-    let fom1 = "<form>\n" +
+    let fom1 = "<form action='/facility?action=create' method='post'>\n" +
         "    <p>Tên Dịch Vụ</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"name\"> <br>\n" +
         "    <p>Diện Tích Sử Dụng</p>\n" +
-        "    <input class=\"form-control\" type=\"email\" name=\"area\">\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"area\">\n" +
         "    <p>Chi Phí Thuê</p>\n" +
+
         "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
         "    <p>Số Người Tối Đa</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
         "    <p>Kiểu Thuê</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"renTypeName\">\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"rentTypeId\">\n" +
         "    <p>Tiêu Chuẩn Phòng</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"standardRoom\">\n" +
         "    <p>Mô Tả Tiện Nghi Khác</p>\n" +
@@ -285,8 +285,10 @@
         "    <input class=\"form-control\" type=\"text\" name=\"poolArea\">\n" +
         "    <p>Số Tầng</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"numberOfFloors\">\n" +
+        "    <p>Dịch Vụ Miễn Phí</p>\n" +
+        "    <input class=\"form-control\" type=\"text\" name=\"facilityFree\">\n" +
+        "    <button type=\"submit\" class=\"btn btn-primary\">Kết</button>\n" +
         "</form>";
-
     let fom2 = "<form>\n" +
         "    <p>Tên Dịch Vụ</p>\n" +
         "    <input class=\"form-control\" type=\"text\"  name=\"name\"> <br>\n" +
@@ -305,7 +307,6 @@
         "    <p>Số Tầng</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"numberOfFloors\">\n" +
         "</form>";
-
     let fom3 = "<form>\n" +
         "    <p>Tên Dịch Vụ</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"name\"> <br>\n" +
@@ -320,9 +321,7 @@
         "    <p>Dịch Vụ Miễn Phí Đi Kèm</p>\n" +
         "    <input class=\"form-control\" type=\"text\" name=\"facilityFree\">\n" +
         "</form>";
-
     document.getElementById("results").innerHTML = fom1;
-
     function showValue() {
         var ele = elements.value;
         if (ele == 1) {

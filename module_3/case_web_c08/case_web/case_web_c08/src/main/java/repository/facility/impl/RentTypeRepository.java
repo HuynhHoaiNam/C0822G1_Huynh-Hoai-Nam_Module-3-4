@@ -30,6 +30,6 @@ public class RentTypeRepository implements IRentTypeRepository {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return null;
+        return rentTypeList;
     }
 }
