@@ -26,6 +26,8 @@ public class FacilityServlet extends HttpServlet {
     private IRentTypeService rentTypeService = new RentTypeService();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
@@ -83,32 +85,41 @@ public class FacilityServlet extends HttpServlet {
 
 
     private void create(HttpServletRequest request, HttpServletResponse response) {
-
         String name = request.getParameter("name");
-        Integer area = Integer.parseInt(request.getParameter("area"));
-        Double cost = Double.parseDouble(request.getParameter("cost"));
-        Integer maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
+        int area = Integer.parseInt(request.getParameter("area"));
+        double cost = Double.parseDouble(request.getParameter("cost"));
+        int maxPeople = Integer.parseInt(request.getParameter("maxPeople"));
         String standardRoom = request.getParameter("standardRoom");
-        String descriptionOtherConvenience = request.getParameter("standardRoom");
-
-        Double poolArea = Double.parseDouble(request.getParameter("descriptionOtherConvenience"));
-
-        Integer numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
-
-
+        String descriptionOtherConvenience = request.getParameter("descriptionOtherConvenience");
+        Double poolArea;
+        if (request.getParameter("poolArea") == null) {
+            poolArea = null;
+        } else {
+            poolArea = Double.parseDouble(request.getParameter("poolArea"));
+        }
+        Integer numberOfFloors;
+        if (request.getParameter("numberOfFloors") == null) {
+            numberOfFloors = null;
+        } else {
+            numberOfFloors = Integer.parseInt(request.getParameter("numberOfFloors"));
+        }
         String facilityFree = request.getParameter("facilityFree");
-
-        Integer rentTypeId = Integer.valueOf(request.getParameter("rentTypeId"));
-        Integer facilityTypeId = Integer.parseInt(request.getParameter("facilityTypeId"));
-        Facility facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom,
-                descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
+        int rentTypeId = Integer.parseInt(request.getParameter("rentTypeId"));
+        int facilityTypeId = Integer.parseInt(request.getParameter("facilityTypeId"));
+        Facility facility = new Facility(name, area, cost, maxPeople, rentTypeId, facilityTypeId, standardRoom, descriptionOtherConvenience, poolArea, numberOfFloors, facilityFree);
         boolean check = facilityService.createF(facility);
         String mess = "Thêm Mới Thành Công";
         if (!check) {
             mess = "Thêm Mới Thất Bại";
         }
         request.setAttribute("mess", mess);
-        showFacility(request, response);
+        try {
+            request.getRequestDispatcher("/view/facility/create.jsp").forward(request, response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showSearch(HttpServletRequest request, HttpServletResponse response) {
@@ -126,14 +137,16 @@ public class FacilityServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         if (action == null) {
             action = "";
         }
         switch (action) {
-//            case "create":
-//                showCreate(request, response);
-//                break;
+            case "create":
+                showCreate(request, response);
+                break;
             case "update":
                 showFormUpdate(request, response);
                 break;
@@ -161,17 +174,21 @@ public class FacilityServlet extends HttpServlet {
     }
 
 
-//    private void showCreate(HttpServletRequest request, HttpServletResponse response) {
-//        List<FacilityType> facilityTypeList = facilityTypeService.selectF();
-//        request.setAttribute("facilityTypeList", facilityTypeList);
-//        try {
-//            request.getRequestDispatcher("/view/facility/list.jsp").forward(request, response);
-//        } catch (ServletException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private void showCreate(HttpServletRequest request, HttpServletResponse response) {
+        List<FacilityType> facilityTypeList= facilityTypeService.selectF();
+        request.setAttribute("facilityTypeList",facilityTypeList);
+        List<RentType> rentTypeList=rentTypeService.selectAllR();
+        request.setAttribute("rentTypeList",rentTypeList);
+        List<Facility>facilityList=facilityService.selectAll();
+        request.setAttribute("facilityList",facilityList);
+        try {
+            request.getRequestDispatcher("/view/facility/create_test.jsp").forward(request,response);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void showFacility(HttpServletRequest request, HttpServletResponse response) {
         List<FacilityType> facilityTypeList = facilityTypeService.selectF();

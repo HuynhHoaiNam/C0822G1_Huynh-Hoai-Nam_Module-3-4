@@ -20,7 +20,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String name, String dateOfBirth, String idCard, double salary, String phoneNumber,
+    public Employee(int id,String name, String dateOfBirth, String idCard, double salary, String phoneNumber,
                     String email, String address, int positionId, int educationDegreeId, int divisionId) {
         this.id = id;
         this.name = name;

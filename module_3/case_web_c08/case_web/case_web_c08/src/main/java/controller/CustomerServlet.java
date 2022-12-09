@@ -57,7 +57,7 @@ public class CustomerServlet extends HttpServlet {
         List<CustomerType> customerTypeList = customerTypeService.listCustomerType();
         request.setAttribute("customerTypeList", customerTypeList);
         try {
-            request.getRequestDispatcher("/view/customer/list_customer.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/customer/list.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -73,7 +73,7 @@ public class CustomerServlet extends HttpServlet {
         List<Customer> customerList = customerService.listCustomer();
         request.setAttribute("customerList", customerList);
         try {
-            request.getRequestDispatcher("/view/customer/list_customer.jsp").forward(request, response);
+            request.getRequestDispatcher("/view/customer/list.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -107,8 +107,8 @@ public class CustomerServlet extends HttpServlet {
         boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
         String idCard = request.getParameter("idCard");
         String phoneNumber = request.getParameter("phoneNumber");
-        String address = request.getParameter("email");
-        String email = request.getParameter("address");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
         int customerTypeId = Integer.parseInt(request.getParameter("customerTypeId"));
         Customer customer = new Customer(name, dateOfBirth, gender, idCard, phoneNumber, address, email, customerTypeId);
         boolean check = customerService.create(customer);
@@ -157,7 +157,7 @@ public class CustomerServlet extends HttpServlet {
         List<Customer> customerList = customerService.listCustomer();
         request.setAttribute("customerList", customerList);
         try {
-            request.getRequestDispatcher("view/customer/list_customer.jsp").forward(request, response);
+            request.getRequestDispatcher("view/customer/list.jsp").forward(request, response);
         } catch (ServletException e) {
             e.printStackTrace();
         } catch (IOException e) {

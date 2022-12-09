@@ -159,7 +159,8 @@ public class CustomerRepository implements ICustomerRepository {
                     String addressFind = resultSet.getString("address");
                     String email = resultSet.getString("email");
                     String nameType = resultSet.getString("name_type");
-                    CustomerType customerType = new CustomerType(id, nameType);
+                    int customerTypeId= resultSet.getInt("customer_type_id");
+                    CustomerType customerType = new CustomerType(customerTypeId, nameType);
                      customer = new Customer(idFind, name, dateOfBirth, gender, idCard, phoneNumber, addressFind, email, customerType);
                 }
         } catch (SQLException throwables) {

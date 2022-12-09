@@ -11,8 +11,11 @@
 <html>
 <head>
     <title>Trang Danh Sách Nhân Viên</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -58,35 +61,41 @@
                     <!--DropDowns-->
                     <div class="btn-group">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/furama" >Trang Chủ</a>
+                            <a class="nav-link active a " aria-current="page" style="color: white" href="/furama">Trang
+                                Chủ</a>
                         </button>
                     </div>
                     <!--DropDowns2-->
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/furama?action=listCustomer">Khách Hàng</a>
+                            <a class="nav-link active a " style="color: white" aria-current="page"
+                               href="/furama?action=listCustomer">Khách Hàng</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/employee">Nhân Viên</a>
+                            <a class="nav-link active a " style="color: white" aria-current="page" href="/employee">Nhân
+                                Viên</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/facility">Dịch Vụ</a>
+                            <a class="nav-link active a " style="color: white" aria-current="page" href="/facility">Dịch
+                                Vụ</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Hợp Đồng</a>
+                            <a style="color: white">Hợp Đồng</a>
                         </button>
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <form class="d-flex" action="/employee?action=search" method="post">
-                        <input class="form-control me-2" type="search" placeholder="Tên" aria-label="Nhập Tên" name="nameInput">
-                        <input class="form-control me-2" type="search" placeholder="Địa Chỉ" aria-label="Nhập Địa Chỉ" name="addressInput">
+                        <input class="form-control me-2" type="search" placeholder="Tên" aria-label="Nhập Tên"
+                               name="name">
+                        <input class="form-control me-2" type="search" placeholder="Địa Chỉ"
+                               aria-label="Nhập Địa Chỉ" name="address">
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
                 </div>
@@ -94,10 +103,18 @@
         </nav>
     </div>
 
+
+    <c:if test="${mess!=null}">
+        <span>${mess}</span>
+    </c:if>
     <!--    Main Content List-->
     <!--Danh Sách Khách Hàng-->
-    <div class="col-lg-12" style="text-align: center;background-color: lightyellow"><h1 style="margin: 0">Danh Sách Khách Hàng</h1></div>
-    <button class="btn btn-success"><a style="text-decoration: none;color: white" href="/employee?action=create">Them Moi</a></button>
+    <div class="col-lg-12" style="text-align: center;background-color: lightyellow"><h1 style="margin: 0">Danh Sách Nhân
+        Viên</h1></div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Thêm Mới
+    </button>
     <div class="col-lg-12">
         <table class="table table-dark table-striped table-bordered" style="width: 100%" id='tableStudent'>
             <thead>
@@ -132,12 +149,18 @@
                     <td>${emList.getEducationDegree().getName()}</td>
                     <td>${emList.getDivision().getName()}</td>
                     <td>
-                        <button class="btn btn-warning"><a href="/employee?action=update&id=${emList.getId()}">Sửa</a></button>
+                        <!-- Button trigger modal sửa -->
+                        <button type="button"
+<%--                                onclick="idRemove('${emList.getId()}','${emList.getName()}') "--%>
+                                class="btn btn-warning" data-bs-toggle="modal"
+                                data-bs-target="#exampleEdit">
+                            Sửa
+                        </button>
                     </td>
-                    <td><!-- Button trigger modal -->
-                        <button  type="button"  onclick="idRemove('${emList.getId()}','${emList.getName()}') "
-                                 class="btn btn-danger" data-bs-toggle="modal"
-                                 data-bs-target="#exampleRemove">
+                    <td><!-- Button trigger modal xoá -->
+                        <button type="button" onclick="idRemove('${emList.getId()}','${emList.getName()}') "
+                                class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#exampleRemove">
                             Xoá
                         </button>
                     </td>
@@ -186,7 +209,6 @@
 </div>
 
 
-
 <%--    Modal Xoá--%>
 <div class="modal fade" id="exampleRemove" tabindex="-1" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
@@ -205,7 +227,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ
                 </button>
-                <form action="/furama?action=delete" method="post">
+                <form action="/employee?action=delete" method="post">
                     <%-- name="id" của getParameter("id")--%>
                     <input type="hidden" name="id" id="idInput">
                     <button class="btn btn-primary">Xoá</button>
@@ -216,26 +238,217 @@
 </div>
 
 
+<!-- Modal thêm mới -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Thêm Mới Nhân Viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/employee?action=create" method="post">
+                <div class="modal-body">
+                    <table class="table table-success table-striped container">
+                        <tr>
+                            <th>Id:</th>
+                            <td><input type="number" name="id"></td>
+                        </tr>
+                        <tr>
+                            <th>Tên Nhân Viên:</th>
+                            <td><input type="text" name="name"></td>
+                        </tr>
+                        <tr>
+                            <th>Ngày Sinh:</th>
+                            <td><input type="date" name="dateOfBirth"></td>
+                        </tr>
+                        <tr>
+                            <th>Số Căn Cước:</th>
+                            <td><input type="text" name="idCard" required pattern="(\d){9}"></td>
+                        </tr>
+                        <tr>
+                            <th>Lương:</th>
+                            <td><input type="text" name="salary" required ></td>
+                        </tr>
+                        <tr>
+                            <th>Số ĐT:</th>
+                            <td><input type="text" name="phoneNumber" required></td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td><input type="email" name="email"></td>
+                        </tr>
+                        <tr>
+                            <th>Địa Chỉ:</th>
+                            <td><input type="text" name="address"></td>
+                        </tr>
+                        <tr>
+                            <th>Vị Trí:</th>
+                            <td>
+                                <%--                                <input type="text" name="positionName">--%>
+                                <select name="positionName">
+                                    <option value="1">Quản Lý</option>
+                                    <option value="2">Nhân Viên</option>
+                                </select>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Trình Độ:</th>
+                            <td>
+                                <%--                                <input type="text" name="educationName">--%>
+                                <select name="educationName">
+                                    <option value="1">Trung Cấp</option>
+                                    <option value="2">Cao Đẳng</option>
+                                    <option value="3">Đại Học</option>
+                                    <option value="4">Sau Đại Học</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Bộ Phận:</th>
+                            <td>
+                                <%--                                <input type="text" name="division">--%>
+                                <select name="divisionName">
+                                    <option value="1">Sale-Marketing</option>
+                                    <option value="2">Hành Chính</option>
+                                    <option value="3">Phục Vụ</option>
+                                    <option value="4">Quản Lý</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <%--                nút submit--%>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal chỉnh sửa -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabelEdit">Chỉnh Sửa Nhân Viên</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/employee?action=create" method="post">
+                <div class="modal-body">
+                    <table class="table table-success table-striped container">
+                        <tr>
+                            <th>Id:</th>
+                            <td><input type="number" name="id"></td>
+                        </tr>
+                        <tr>
+                            <th>Tên Nhân Viên:</th>
+                            <td><input type="text" name="name"></td>
+                        </tr>
+                        <tr>
+                            <th>Ngày Sinh:</th>
+                            <td><input type="date" name="dateOfBirth"></td>
+                        </tr>
+                        <tr>
+                            <th>Số Căn Cước:</th>
+                            <td><input type="text" name="idCard" required pattern="(\d){9}"></td>
+                        </tr>
+                        <tr>
+                            <th>Lương:</th>
+                            <td><input type="text" name="salary" required ></td>
+                        </tr>
+                        <tr>
+                            <th>Số ĐT:</th>
+                            <td><input type="text" name="phoneNumber" required></td>
+                        </tr>
+                        <tr>
+                            <th>Email:</th>
+                            <td><input type="email" name="email"></td>
+                        </tr>
+                        <tr>
+                            <th>Địa Chỉ:</th>
+                            <td><input type="text" name="address"></td>
+                        </tr>
+                        <tr>
+                            <th>Vị Trí:</th>
+                            <td>
+                                <%--                                <input type="text" name="positionName">--%>
+                                <select name="positionName">
+                                    <option value="1">Quản Lý</option>
+                                    <option value="2">Nhân Viên</option>
+                                </select>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Trình Độ:</th>
+                            <td>
+                                <%--                                <input type="text" name="educationName">--%>
+                                <select name="educationName">
+                                    <option value="1">Trung Cấp</option>
+                                    <option value="2">Cao Đẳng</option>
+                                    <option value="3">Đại Học</option>
+                                    <option value="4">Sau Đại Học</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Bộ Phận:</th>
+                            <td>
+                                <%--                                <input type="text" name="division">--%>
+                                <select name="divisionName">
+                                    <option value="1">Sale-Marketing</option>
+                                    <option value="2">Hành Chính</option>
+                                    <option value="3">Phục Vụ</option>
+                                    <option value="4">Quản Lý</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <%--                nút submit--%>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
 <script>
     function idRemove(id, name) {
         // value dùng cho input
         document.getElementById("idInput").value = id;
         // innerText dùng cho ko phải input
-        document.getElementById("nameInput").innerText=name;
+        document.getElementById("nameInput").innerText = name;
     }
 </script>
+
+<script>
+    function editEmployee() {
+document.getElementById()
+    }
+</script>
+
 
 <script src="jquery/jquery-3.5.1.min.js"></script>
 <script src="datatables/js/jquery.dataTables.min.js"></script>
 <script src="datatables/js/dataTables.bootstrap5.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#tableStudent').dataTable( {
+    $(document).ready(function () {
+        $('#tableStudent').dataTable({
             "dom": 'lrtip',
             "lengthChange": false,
             "pageLength": 5
-        } );
-    } );
+        });
+    });
 </script>
 </body>
 </html>

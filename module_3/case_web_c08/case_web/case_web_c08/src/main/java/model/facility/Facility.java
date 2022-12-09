@@ -1,17 +1,17 @@
 package model.facility;
 
 public class Facility {
-    private Integer id;
+    private int id;
     private String name;
-    private Integer area;
-    private Double cost;
-    private Integer maxPeople;
-    private Integer rentTypeId;
-    private Integer facilityTypeId;
+    private int area;
+    private double cost;
+    private int maxPeople;
+    private int rentTypeId;
+    private int facilityTypeId;
     private String standardRoom;
     private  String descriptionOtherConvenience;
-    private Double poolArea;
-    private Integer numberOfFloors;
+    private double poolArea;
+    private int numberOfFloors;
     private String facilityFree;
     private FacilityType facilityType;
     private RentType rentType;
@@ -21,8 +21,8 @@ public class Facility {
 
 
 
-    public Facility(String name, Integer area, Double cost, Integer maxPeople, Integer rentTypeId, Integer facilityTypeId,
-                    String standardRoom, String descriptionOtherConvenience, Double poolArea, Integer numberOfFloors,
+    public Facility(String name, int area, double cost, int maxPeople, int rentTypeId, int facilityTypeId,
+                    String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors,
                     String facilityFree) {
         this.name = name;
         this.area = area;
@@ -37,8 +37,8 @@ public class Facility {
         this.facilityFree = facilityFree;
     }
 
-    public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople,
-                    String standardRoom, String descriptionOtherConvenience, Double poolArea, Integer numberOfFloors,
+    public Facility(int id, String name, int area, double cost, int maxPeople,
+                    String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors,
                     String facilityFree, FacilityType facilityType, RentType rentType) {
         this.id = id;
         this.name = name;
@@ -54,8 +54,8 @@ public class Facility {
         this.rentType = rentType;
     }
 
-    public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople, Integer rentTypeId, Integer facilityTypeId,
-                    String standardRoom, String descriptionOtherConvenience, Double poolArea, Integer numberOfFloors, String facilityFree) {
+    public Facility(int id, String name, int area, double cost, int maxPeople, int rentTypeId, int facilityTypeId,
+                    String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors, String facilityFree) {
         this.id = id;
         this.name = name;
         this.area = area;
@@ -70,8 +70,8 @@ public class Facility {
         this.facilityFree = facilityFree;
     }
 
-    public Facility(Integer id, String name, Integer area, Double cost, Integer maxPeople, Integer rentTypeId, Integer facilityTypeId,
-                    String standardRoom, String descriptionOtherConvenience, Double poolArea, Integer numberOfFloors,
+    public Facility(int id, String name, int area, double cost, int maxPeople, int rentTypeId, int facilityTypeId,
+                    String standardRoom, String descriptionOtherConvenience, double poolArea, int numberOfFloors,
                     String facilityFree, FacilityType facilityType, RentType rentType) {
         this.id = id;
         this.name = name;
@@ -89,11 +89,11 @@ public class Facility {
         this.rentType = rentType;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -105,43 +105,43 @@ public class Facility {
         this.name = name;
     }
 
-    public Integer getArea() {
+    public int getArea() {
         return area;
     }
 
-    public void setArea(Integer area) {
+    public void setArea(int area) {
         this.area = area;
     }
 
-    public Double getCost() {
+    public double getCost() {
         return cost;
     }
 
-    public void setCost(Double cost) {
+    public void setCost(double cost) {
         this.cost = cost;
     }
 
-    public Integer getMaxPeople() {
+    public int getMaxPeople() {
         return maxPeople;
     }
 
-    public void setMaxPeople(Integer maxPeople) {
+    public void setMaxPeople(int maxPeople) {
         this.maxPeople = maxPeople;
     }
 
-    public Integer getRentTypeId() {
+    public int getRentTypeId() {
         return rentTypeId;
     }
 
-    public void setRentTypeId(Integer rentTypeId) {
+    public void setRentTypeId(int rentTypeId) {
         this.rentTypeId = rentTypeId;
     }
 
-    public Integer getFacilityTypeId() {
+    public int getFacilityTypeId() {
         return facilityTypeId;
     }
 
-    public void setFacilityTypeId(Integer facilityTypeId) {
+    public void setFacilityTypeId(int facilityTypeId) {
         this.facilityTypeId = facilityTypeId;
     }
 
@@ -161,7 +161,7 @@ public class Facility {
         this.descriptionOtherConvenience = descriptionOtherConvenience;
     }
 
-    public Double getPoolArea() {
+    public double getPoolArea() {
         return poolArea;
     }
 
@@ -169,11 +169,11 @@ public class Facility {
         this.poolArea = poolArea;
     }
 
-    public Integer getNumberOfFloors() {
+    public int getNumberOfFloors() {
         return numberOfFloors;
     }
 
-    public void setNumberOfFloors(Integer numberOfFloors) {
+    public void setNumberOfFloors(int numberOfFloors) {
         this.numberOfFloors = numberOfFloors;
     }
 

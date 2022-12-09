@@ -21,7 +21,7 @@
 <c:if test="${mess!=null}">
     <span style="color: green">${mess}</span>
 </c:if>
-<button class="btn btn-warning"><a class="thea" href="/furama?action=listCustomer">Quay Lại Trang Danh Sách</a></button>
+<button class="btn btn-warning"><a style="color: white; text-decoration: none" href="/furama?action=listCustomer"><= Back</a></button>
 <form action="/furama?action=update&id=${customer.getId()}" method="post">
     <fieldset>
         <table class="table table-success table-striped container">
@@ -29,7 +29,7 @@
                 <th>Mã Loại Khách:</th>
                 <td><select name="customerTypeId">
                     <c:forEach var="cusType" items="${customerTypeList}">
-                        <option value="${cusType.getId()}" ${cusType.getId() == customer.getCustomerTypeId() ? 'selected' : ''}>
+                        <option value="${cusType.getId()}" ${cusType.getId() == customer.getCustomerType().getId() ? 'selected' : ''}>
                                 ${cusType.getName()}</option>
                     </c:forEach>
                 </select></td>

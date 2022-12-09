@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>Trang Thêm Mới Khách Hàng</title>
-    <link rel="stylesheet" href="/view/customer/styleCustomer.css">
+    <link rel="stylesheet" href="/view/customer/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
@@ -20,7 +20,7 @@
 <c:if test="${mess!=null}">
     <span style="color: green">${mess}</span>
 </c:if>
-<button class="btn btn-warning"><a class="thea" href="/furama?action=listCustomer">Quay Lại Trang Danh Sách</a></button>
+<button class="btn btn-warning"><a style="color: white" href="/furama?action=listCustomer">Back</a></button>
 <form action="/furama?action=create" method="post">
     <table class="table table-success table-striped container">
         <tr>

@@ -13,5 +13,5 @@ public interface IEmployeeRepository {
 
     boolean deleteE(int id);
 
-    List<Employee> findE(String name, String userName);
+    List<Employee> findE(String name, String address);
 }

@@ -59,29 +59,29 @@
                     <!--DropDowns-->
                     <div class="btn-group">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/furama">Trang Chủ</a>
+                            <a class="thea nav-link active a " style="color: white" aria-current="page" href="/furama">Trang Chủ</a>
                         </button>
                     </div>
                     <!--DropDowns2-->
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a class="thea nav-link active a " aria-current="page" href="/furama?action=listCustomer">Khách
+                            <a class="thea nav-link active a " style="color: white" aria-current="page" href="/furama?action=listCustomer">Khách
                                 Hàng</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Nhân Viên</a>
+                            <a style="color: white">Nhân Viên</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Dịch Vụ</a>
+                            <a style="color: white">Dịch Vụ</a>
                         </button>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <button type="button" class="btn btn-info">
-                            <a>Hợp Đồng</a>
+                            <a style="color: white">Hợp Đồng</a>
                         </button>
                     </div>
                 </div>
@@ -103,7 +103,7 @@
     <div class="col-lg-12" style="text-align: center;background-color: lightyellow"><h1 style="margin: 0">Danh Sách
         Dịch Vụ</h1></div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Thêm Mới
+        <a style="text-decoration: none; color: white" href="/facility?action=create">Thêm Mới</a>
     </button><c:if test="${mess!=null}"><span>${mess}</span></c:if>
     <div class="col-lg-12">
         <table class="table table-dark table-striped table-bordered" style="width: 100%" id='tableStudent'>
@@ -153,12 +153,10 @@
                     </c:if>
                     <td>${facility.getFacilityFree()}</td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal">Sửa
-                        </button>
+                        <button type="submit" class="btn btn-primary" ><a style="text-decoration: none; color: white" href="/facility?action=update&id=${facility.id}">Sửa</a></button>
                     </td>
                     <td><!-- Button trigger modal -->
-                        <button type="button" onclick="idRemove('${listCustomer.getId()}','${listCustomer.getName()}')"
+                        <button type="button" onclick="idRemove('${facility.getId()}','${facility.getName()}')"
                                 class="btn btn-danger" data-bs-toggle="modal"
                                 data-bs-target="#exampleRemove">
                             Xoá
@@ -227,7 +225,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ
                 </button>
-                <form action="/furama?action=delete" method="post">
+                <form action="/facility?action=delete" method="post">
                     <%-- name="id" của getParameter("id")--%>
                     <input type="hidden" name="id" id="idInput">
                     <button class="btn btn-primary">Xoá</button>
@@ -239,100 +237,28 @@
 
 
 <%--Modal thêm mới--%>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabelCreate">Thêm Mới Dịch Vụ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <select id="elements" onchange="showValue()">
-                    <option value="1" selected>Villa</option>
-                    <option value="2">House</option>
-                    <option value="3">Room</option>
-                </select>
-                <div id="results"></div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<%--js thêm mới modal--%>
-<script>
-    let fom1 = "<form action='/facility?action=create' method='post'>\n" +
-        "    <p>Tên Dịch Vụ</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"name\"> <br>\n" +
-        "    <p>Diện Tích Sử Dụng</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"area\">\n" +
-        "    <p>Chi Phí Thuê</p>\n" +
-
-        "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
-        "    <p>Số Người Tối Đa</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
-        "    <p>Kiểu Thuê</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"rentTypeId\">\n" +
-        "    <p>Tiêu Chuẩn Phòng</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"standardRoom\">\n" +
-        "    <p>Mô Tả Tiện Nghi Khác</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"descriptionOtherConvenience\">\n" +
-        "    <p>Diện Tích Hồ Bơi</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"poolArea\">\n" +
-        "    <p>Số Tầng</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"numberOfFloors\">\n" +
-        "    <p>Dịch Vụ Miễn Phí</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"facilityFree\">\n" +
-        "    <button type=\"submit\" class=\"btn btn-primary\">Kết</button>\n" +
-        "</form>";
-    let fom2 = "<form>\n" +
-        "    <p>Tên Dịch Vụ</p>\n" +
-        "    <input class=\"form-control\" type=\"text\"  name=\"name\"> <br>\n" +
-        "    <p>Diện Tích Sử Dụng</p>\n" +
-        "    <input class=\"form-control\" type=\"email\" name=\"area\">\n" +
-        "    <p>Chi Phí Thuê</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
-        "    <p>Số Người Tối Đa</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
-        "    <p>Kiểu Thuê</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"renTypeName\">\n" +
-        "    <p>Tiêu Chuẩn Phòng</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"standardRoom\">\n" +
-        "    <p>Mô Tả Tiện Nghi Khác</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"descriptionOtherConvenience\">\n" +
-        "    <p>Số Tầng</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"numberOfFloors\">\n" +
-        "</form>";
-    let fom3 = "<form>\n" +
-        "    <p>Tên Dịch Vụ</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"name\"> <br>\n" +
-        "    <p>Diện Tích Sử Dụng</p>\n" +
-        "    <input class=\"form-control\" type=\"email\" name=\"area\">\n" +
-        "    <p>Chi Phí Thuê</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"cost\">\n" +
-        "    <p>Số Người Tối Đa</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"maxPeople\">\n" +
-        "    <p>Kiểu Thuê</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"renTypeName\">\n" +
-        "    <p>Dịch Vụ Miễn Phí Đi Kèm</p>\n" +
-        "    <input class=\"form-control\" type=\"text\" name=\"facilityFree\">\n" +
-        "</form>";
-    document.getElementById("results").innerHTML = fom1;
-    function showValue() {
-        var ele = elements.value;
-        if (ele == 1) {
-            document.getElementById("results").innerHTML = fom1;
-        } else if (ele == 2) {
-            document.getElementById("results").innerHTML = fom2;
-        } else {
-            document.getElementById("results").innerHTML = fom3;
-        }
-    }
-</script>
+<%--<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--%>
+<%--    <div class="modal-dialog">--%>
+<%--        <div class="modal-content">--%>
+<%--            <div class="modal-header">--%>
+<%--                <h5 class="modal-title" id="exampleModalLabelCreate">Thêm Mới Dịch Vụ</h5>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--%>
+<%--            </div>--%>
+<%--            <div class="modal-body">--%>
+<%--                <select id="elements" onchange="showValue()">--%>
+<%--                    <option value="1" selected>Villa</option>--%>
+<%--                    <option value="2">House</option>--%>
+<%--                    <option value="3">Room</option>--%>
+<%--                </select>--%>
+<%--                <div id="results"></div>--%>
+<%--            </div>--%>
+<%--            <div class="modal-footer">--%>
+<%--                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>--%>
+<%--                <button type="button" class="btn btn-primary">Lưu</button>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+<%--    </div>--%>
+<%--</div>--%>
 
 
 <%--js xoá modal--%>
