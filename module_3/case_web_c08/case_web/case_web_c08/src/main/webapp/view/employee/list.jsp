@@ -285,10 +285,10 @@
                         <tr>
                             <th>Vị Trí:</th>
                             <td>
-                                <%--                                <input type="text" name="positionName">--%>
                                 <select name="positionName">
-                                    <option value="1">Quản Lý</option>
-                                    <option value="2">Nhân Viên</option>
+                                  <c:forEach items="${positionList}" var="posList">
+                                      <option value="${posList.getId()}">${posList.getName()}</option>
+                                  </c:forEach>
                                 </select>
 
                             </td>
@@ -296,24 +296,20 @@
                         <tr>
                             <th>Trình Độ:</th>
                             <td>
-                                <%--                                <input type="text" name="educationName">--%>
                                 <select name="educationName">
-                                    <option value="1">Trung Cấp</option>
-                                    <option value="2">Cao Đẳng</option>
-                                    <option value="3">Đại Học</option>
-                                    <option value="4">Sau Đại Học</option>
+                                    <c:forEach var="eduList" items="${employeeList}">
+                                        <option value="${eduList.getId()}">${eduList.getName()}</option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <th>Bộ Phận:</th>
                             <td>
-                                <%--                                <input type="text" name="division">--%>
                                 <select name="divisionName">
-                                    <option value="1">Sale-Marketing</option>
-                                    <option value="2">Hành Chính</option>
-                                    <option value="3">Phục Vụ</option>
-                                    <option value="4">Quản Lý</option>
+                                   <c:forEach items="${divisionList}" var="diviList">
+                                       <option value="${diviList.getId()}">${diviList.getName()}</option>
+                                   </c:forEach>
                                 </select>
                             </td>
                         </tr>
@@ -377,10 +373,10 @@
                         <tr>
                             <th>Vị Trí:</th>
                             <td>
-                                <%--                                <input type="text" name="positionName">--%>
                                 <select name="positionName">
-                                    <option value="1">Quản Lý</option>
-                                    <option value="2">Nhân Viên</option>
+                                    <c:forEach items="${positionList}" var="posList">
+                                        <option value="${posList.getId()}">${posList.getName()}</option>
+                                    </c:forEach>
                                 </select>
 
                             </td>
@@ -388,24 +384,20 @@
                         <tr>
                             <th>Trình Độ:</th>
                             <td>
-                                <%--                                <input type="text" name="educationName">--%>
                                 <select name="educationName">
-                                    <option value="1">Trung Cấp</option>
-                                    <option value="2">Cao Đẳng</option>
-                                    <option value="3">Đại Học</option>
-                                    <option value="4">Sau Đại Học</option>
+                                    <c:forEach var="eduList" items="${employeeList}">
+                                        <option value="${eduList.getId()}">${eduList.getName()}</option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <th>Bộ Phận:</th>
                             <td>
-                                <%--                                <input type="text" name="division">--%>
                                 <select name="divisionName">
-                                    <option value="1">Sale-Marketing</option>
-                                    <option value="2">Hành Chính</option>
-                                    <option value="3">Phục Vụ</option>
-                                    <option value="4">Quản Lý</option>
+                                    <c:forEach items="${divisionList}" var="diviList">
+                                        <option value="${diviList.getId()}">${diviList.getName()}</option>
+                                    </c:forEach>
                                 </select>
                             </td>
                         </tr>
