@@ -4,8 +4,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CalculatorService {
-    public double calculationResults(double firstValue, double secondValue, String nameCheck) {
-        switch (nameCheck) {
+    public double calculate(double firstValue, double secondValue, String operator) {
+        switch (operator) {
             case "+":
                 return firstValue + secondValue;
             case "-":

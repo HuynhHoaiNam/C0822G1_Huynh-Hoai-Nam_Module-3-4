@@ -17,7 +17,7 @@ public class SandwichRController {
     }
 
     @PostMapping("/result")
-    public String result (Model model,@RequestParam("nameCheck") String nameCheck) {
+    public String result(Model model, @RequestParam("nameCheck") String[] nameCheck ) {
         model.addAttribute("nameCheck", nameCheck);
         return "/sandwich/selected-list";
     }

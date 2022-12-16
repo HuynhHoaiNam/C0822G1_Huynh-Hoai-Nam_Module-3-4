@@ -22,8 +22,8 @@ public class CalculatorController {
 
     @PostMapping("/result")
     public String result(Model model, @RequestParam("firstValue") double firstValue,
-                         @RequestParam("secondValue") double secondValue, @RequestParam("nameCheck") String nameCheck) {
-        double result = calculatorService.calculationResults(firstValue, secondValue, nameCheck);
+                         @RequestParam("secondValue") double secondValue, @RequestParam("operator") String operator) {
+        double result = calculatorService.calculate(firstValue, secondValue, operator);
         model.addAttribute("result", result);
         return "/calculator/result";
     }

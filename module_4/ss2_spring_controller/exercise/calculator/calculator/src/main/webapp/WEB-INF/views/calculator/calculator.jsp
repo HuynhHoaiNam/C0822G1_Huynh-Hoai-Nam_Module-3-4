@@ -21,7 +21,7 @@
 <form action="result" method="post" class="container">
     <h1>Calculator</h1><br>
     <input class="form-control" name="firstValue" placeholder="Nhập giá trị 1"></pre><br>
-    <select name="nameCheck" class="form-select">
+    <select name="operator" class="form-select">
         <option value="+" selected>Cộng</option>
         <option value="-">Trừ</option>
         <option value="*">Nhân</option>
