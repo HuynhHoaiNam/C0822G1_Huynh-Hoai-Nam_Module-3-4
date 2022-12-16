@@ -12,6 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-<pre><h1 style="color: red">Những gia vị bạn đã chọn là: <c:forEach var="sandwich" items="${nameCheck}">${sandwich}</c:forEach></h1></pre>
+<pre><h1 style="color: red">Những gia vị bạn đã chọn là: <c:forEach var="nameCheck" items="${nameCheck}">${nameCheck}</c:forEach></h1></pre>
 </body>
 </html>
