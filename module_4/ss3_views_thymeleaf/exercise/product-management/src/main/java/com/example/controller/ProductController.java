@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.model.Product;
+import com.example.service.IProductService;
 import com.example.service.impl.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,13 +17,12 @@ import java.util.zip.ZipEntry;
 @RequestMapping("/home")
 public class ProductController {
     @Autowired
-    private ProductService productService;
-//    private List<Product> productList = new ArrayList<>();
+    private IProductService productService;
 
 
     @GetMapping("/list")
     public String list(Model model) {
-        List<Product> productList = productService.listProduct();
+        List<Product> productList = productService.productList();
         model.addAttribute("productList", productList);
         return "/product/list";
     }
@@ -35,14 +35,14 @@ public class ProductController {
 
     @PostMapping("/create")
     public String create(@ModelAttribute("product") Product product, RedirectAttributes redirectAttributes) {
-        productService.createProduct(product);
+        productService.create(product);
         redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
         return "redirect:/home/list";
     }
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") int id, RedirectAttributes redirectAttributes) {
-        boolean check = productService.deleteProduct(id);
+        boolean check = productService.delete(id);
         String mess = "Xoá thành công";
         if (!check) {
             mess = "Xoá thất bại";
