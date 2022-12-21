@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a class="nav-link " th:href="@{/}">
+  <button class="btn btn-warning">Back</button>
+</a>
+<form action="/update" method="post" th:object="${blog}">
+  <table class="table table-success table-striped container">
+
+    <td><input type="hidden" th:field="*{id}"></td>
+
+    <tr>
+      <th>Tiêu đề:</th>
+      <td><input type="text" th:field="*{title}"></td>
+    </tr>
+    <tr>
+      <th>Tác giả:</th>
+      <td><input type="text" th:field="*{writer}"></td>
+    </tr>
+    <tr>
+      <th>Nội dung:</th>
+      <td><input type="text" th:field="*{content}"></td>
+    </tr>
+    <tr>
+      <th>Ngày tạo:</th>
+      <td><input type="text" th:field="*{dateCreated}"></td>
+    </tr><tr>
+      <th>Thể loại:</th>
+      <td><input type="text" th:field="*{category}"></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>
+        <button type="submit" style="background-color: lightskyblue; margin: auto">Update</button>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>
