@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa danh mục</title>
+</head>
+<body>
+<a class="nav-link " th:href="@{/}">
+    <button class="btn btn-warning">Back</button>
+</a>
+<form action="/update-category" method="post" th:object="${category}">
+    <table class="table table-success table-striped container">
+
+        <td><input type="hidden" th:field="*{id}"></td>
+
+        <tr>
+            <th>Tên:</th>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit" style="background-color: lightskyblue; margin: auto">Update</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

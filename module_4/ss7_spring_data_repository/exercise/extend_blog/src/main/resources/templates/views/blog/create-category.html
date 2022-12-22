@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang thêm mới</title>
+</head>
+<body>
+<h1>Trang thêm mới</h1>
+<a class="nav-link " th:href="@{/}">
+    <button class="btn btn-warning">Back</button>
+</a>
+<form action="createCategory" method="post" th:object="${category}">
+    <table class="table table-success table-striped container">
+        <tr>
+            <th>Tên danh mục:</th>
+            <td><input type="text" th:field="*{name}"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit" style="background-color: lightskyblue; margin: auto">Create</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
