@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang mượn sách</title>
+</head>
+<body>
+<div class="col-lg-12">
+    <table class="table table-primary table-striped container">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tên sách</th>
+            <th scope="col">Giá sách</th>
+            <th scope="col">Thể loại</th>
+            <th scope="col">Mượn</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="book , status : ${book}">
+            <th scope="row" th:text="${status.count}"></th>
+            <td th:text="${book.name}">tên</td>
+            <td th:text="${book.price}">giá</td>
+            <td th:text="${book.category}">thể loại</td>
+            <td>
+                <a class="nav-link" th:href="@{/showUpdateCustomer/__${book.id}__}">
+                    <button class=" btn btn-primary"><img src="https://img.icons8.com/3d-fluency/94/null/edit.png"
+                                                          style="width: 30px"/></button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
