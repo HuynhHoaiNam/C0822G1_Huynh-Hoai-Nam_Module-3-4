@@ -60,9 +60,9 @@
                 </a>
             </td>
             <td><!-- Button trigger modal -->
-                <button type="button" onclick="idRemove('${facPage.getId()}','${facPage.getName()}')"
+                <button type="button" onclick="getInfo('${facPage.getId()}','${facPage.getName()}')"
                         class="btn btn-danger" data-bs-toggle="modal"
-                        data-bs-target="#exampleRemove">
+                        data-bs-target="#deleteModal">
                     Xoá
                 </button>
             </td>
@@ -71,5 +71,34 @@
     </table>
 </div>
 <footer th:insert="/views/css/footer.html :: footer"></footer>
+
+<div class="modal fade" id="deleteModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <form th:action="@{/facility/deleteFacility}" method="post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Tent</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="idDelete" id="idDelete" hidden>
+                    <p>Bạn chắc chắn muốn xoá <span id="nameDelete"></span> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-primary">Xoá</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    function getInfo(id) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerHTML = id;
+    }
+</script>
 </body>
 </html>

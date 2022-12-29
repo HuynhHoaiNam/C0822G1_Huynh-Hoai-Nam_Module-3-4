@@ -75,4 +75,10 @@ public class FacilityController {
         return "redirect:/listFacility";
     }
 
+    @PostMapping("/deleteFacility")
+    public String delete(@RequestParam("idDelete") int id){
+        facilityService.deleteById(id);
+        return "redirect:/facility/listFacility";
+    }
+
 }
