@@ -15,64 +15,157 @@
     <button class="btn btn-primary">Back</button>
 </a>
 <h3 th:text="${mess}" style="color: red"></h3>
-<form action="/createCustomer" method="post" th:object="${facility}">
-    <table class="table table-success table-striped container">
-        <tr>
-            <th>Tên dịch vụ:</th>
-            <td><input type="text" th:field="*{name}"></td>
-        </tr>
-        <tr>
-            <th>Diện tích:</th>
-            <td><input type="text" th:field="*{area}"></td>
-        </tr>
-        <tr>
-            <th>Giá thuê:</th>
-            <td><input type="text" th:field="*{cost}"></td>
-        </tr>
-        <tr>
-            <th>Người tối đa:</th>
-            <td><input type="number" th:field="*{maxPeople}"></td>
-        </tr>
-        <tr>
-            <th>Tiêu chuẩn phòng:</th>
-            <td><input type="text" th:field="*{standardRoom}"></td>
-        </tr>
-        <tr>
-            <th>Mô tả tiện nghi khác:</th>
-            <td><input type="text" th:field="*{descriptionOtherConvenience}"></td>
-        </tr>
-        <tr>
-            <th>Diện tích hồ bơi:</th>
-            <td><input type="text" th:field="*{poolArea}"></td>
-        </tr>
-        <tr>
-            <th>Số tầng:</th>
-            <td><input type="number" th:field="*{numberOfFloors}"></td>
-        </tr>
-        <tr>
-            <th>Dịch vụ miễn phí đi kèm:</th>
-            <td><input type="text" th:field="*{facilityFree}"></td>
-        </tr>
-        <tr>
-            <th>Loại dịch vụ:</th>
-            <td><select th:field="*{facilityType}">
-                <option th:each="item :${facilityTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
-            </select></td>
-        </tr>
-        <tr>
-            <th>Kiểu thuê:</th>
-            <td><select th:field="*{rentType}">
-                <option th:each="item :${rentTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
-            </select></td>
-        </tr>
-        <tr>
-            <th></th>
-            <td>
-                <button type="submit" class="btn btn-success" style="margin: auto">Update</button>
-            </td>
-        </tr>
-    </table>
+
+<form th:action="@{/facility/creatFacility}"
+      th:object="${facility}" method="POST">
+    <div>
+        <label for="facilityType">Loại dịch vụ:</label>
+        <div>
+            <select id="facilityType" class="form-select" th:field="*{facilityType.id}"
+                    onchange="changeForm(this)">
+                <option th:each="item : ${facilityTypeList}" th:value="${item.id}"
+                        th:text="${item.name}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-4" id="nameForm" style="display: none">
+            <label for="name" >Tên dịch vụ:</label>
+            <div >
+                <input type="text" id="name" placeholder="Nhập tên dịch vụ.."
+                       th:field="*{name}" />
+            </div>
+        </div>
+
+        <div class="mb-4" id="areaForm" style="display: none">
+            <label for="area" >Diện tích sử dụng:</label>
+            <div >
+                <input type="number" id="area" class="form-control" placeholder="Nhập diện tích sử dụng.."
+                       th:field="*{area}"/>
+            </div>
+        </div>
+
+        <div class="mb-4 " id="costForm" style="display: none">
+            <label for="cost" >Chi phí thuê (VNĐ):</label>
+            <div >
+                <input type="number" id="cost" class="form-control" placeholder="Nhập chi phí thuê.."
+                       th:field="*{cost}"/>
+            </div>
+        </div>
+
+        <div class="mb-4 " id="maxPeopleForm" style="display: none">
+            <label for="maxPeople" >Số người tối đa:</label>
+            <div >
+                <input type="number" id="maxPeople" class="form-control" placeholder="Nhập số người tối đa.."
+                       th:field="*{maxPeople}"/>
+            </div>
+        </div>
+        <div class="mb-4 " id="standardRoomForm" style="display: none">
+            <label for="standardRoom">Tiêu chuẩn phòng:</label>
+            <div>
+                <input type="text" id="standardRoom" class="form-control" placeholder="Nhập tiêu chuẩn phòng.."
+                       th:field="*{standardRoom}"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-4" id="descriptionForm" style="display: none">
+            <label for="description" >Mô tả tiện nghi khác:</label>
+            <div>
+                <input type="text" id="description" class="form-control" placeholder="Nhập mô tả tiện nghi khác.."
+                       th:field="*{descriptionOtherConvenience}"/>
+            </div>
+        </div>
+
+        <div class="mb-4 " id="poolAreaForm" style="display: none">
+            <label for="poolArea">Diện tích hồ bơi (m<sup>2</sup>):</label>
+            <div>
+                <input type="number" id="poolArea" class="form-control" placeholder="Nhập diện tích hồ bơi.."
+                       th:field="*{poolArea}"/>
+            </div>
+        </div>
+
+        <div class="mb-4 " id="numberOfFloorsForm" style="display: none">
+            <label for="numberOfFloors">Số tầng:</label>
+            <div>
+                <input type="number" id="numberOfFloors" class="form-control" placeholder="Nhập số tầng.."
+                       th:field="*{numberOfFloors}"/>
+            </div>
+        </div>
+
+        <div class="mb-4 " id="facilityFreeForm" style="display: none">
+            <label for="facilityFree">Dịch vụ miễn phí đi kèm:</label>
+            <div>
+                <input type="text" id="facilityFree" class="form-control"
+                       placeholder="Nhập dịch vụ miễn phí đi kèm.." th:field="*{facilityFree}"/>
+            </div>
+        </div>
+        <div class="mb-4" id="rentTypeForm" style="display: none">
+            <label  for="rentType">Kiểu thuê:</label>
+            <div >
+                <select id="rentType" th:field="*{rentType.id}">
+                    <option th:each="item : ${rentTypeList}" th:value="${item.id}"
+                            th:text="${item.name}"></option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="mb-4 text-center">
+        <button id="save" class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
+            Save
+        </button>
+    </div>
 </form>
+
 <footer th:insert="/views/css/footer.html :: footer"></footer>
+
+
+
+<script>
+    function changeForm(type) {
+        let selectType = type.value;
+        switch (selectType) {
+            case "1":
+                document.getElementById("standardRoomForm").style.display = "block";
+                document.getElementById("descriptionForm").style.display = "block";
+                document.getElementById("poolAreaForm").style.display = "block";
+                document.getElementById("numberOfFloorsForm").style.display = "block";
+                document.getElementById("facilityFreeForm").style.display = "none";
+                document.getElementById("nameForm").style.display = "block";
+                document.getElementById("areaForm").style.display = "block";
+                document.getElementById("costForm").style.display = "block";
+                document.getElementById("maxPeopleForm").style.display = "block";
+                document.getElementById("rentTypeForm").style.display = "block";
+                document.getElementById("save").style.display = "block";
+                break;
+            case "2":
+                document.getElementById("standardRoomForm").style.display = "block";
+                document.getElementById("descriptionForm").style.display = "block";
+                document.getElementById("poolAreaForm").style.display = "none";
+                document.getElementById("numberOfFloorsForm").style.display = "block";
+                document.getElementById("facilityFreeForm").style.display = "none";
+                document.getElementById("nameForm").style.display = "block";
+                document.getElementById("areaForm").style.display = "block";
+                document.getElementById("costForm").style.display = "block";
+                document.getElementById("maxPeopleForm").style.display = "block";
+                document.getElementById("rentTypeForm").style.display = "block";
+                document.getElementById("save").style.display = "block";
+                break;
+            case "3":
+                document.getElementById("standardRoomForm").style.display = "none";
+                document.getElementById("descriptionForm").style.display = "none";
+                document.getElementById("poolAreaForm").style.display = "none";
+                document.getElementById("numberOfFloorsForm").style.display = "none";
+                document.getElementById("facilityFreeForm").style.display = "block";
+                document.getElementById("nameForm").style.display = "block";
+                document.getElementById("areaForm").style.display = "block";
+                document.getElementById("costForm").style.display = "block";
+                document.getElementById("maxPeopleForm").style.display = "block";
+                document.getElementById("rentTypeForm").style.display = "block";
+                document.getElementById("save").style.display = "block";
+                break
+        }
+    }
+</script>
 </body>
 </html>

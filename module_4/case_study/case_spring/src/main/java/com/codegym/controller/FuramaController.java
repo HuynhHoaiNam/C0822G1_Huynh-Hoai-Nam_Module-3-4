@@ -31,12 +31,7 @@ public class FuramaController {
     private ICustomerService customerService;
     @Autowired
     private ICustomerTypeService customerTypeService;
-    @Autowired
-    private IFacilityService facilityService;
-    @Autowired
-    private IFacilityTypeService facilityTypeService;
-    @Autowired
-    private IRentTypeService rentTypeService;
+
 
     @RequestMapping("/")
     public String showHome() {
@@ -96,50 +91,4 @@ public class FuramaController {
         return "redirect:/listCustomer";
     }
 
-    @GetMapping("/listFacility")
-    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        Page<Facility> facilityPage = facilityService.showList(pageable);
-        model.addAttribute("facilityPage", facilityPage);
-        List<FacilityType> facilityTypeList = facilityTypeService.showList();
-        model.addAttribute("facilityTypeList", facilityTypeList);
-        List<RentType> rentTypeList = rentTypeService.showList();
-        model.addAttribute("rentTypeList", rentTypeList);
-        model.addAttribute("facility", new Facility());
-        return "/views/facility/list";
-    }
-
-    @GetMapping("/showCreateFacility")
-    public String showCreateFacility(Model model) {
-        model.addAttribute("facility", new Facility());
-        List<FacilityType> facilityTypeList = facilityTypeService.showList();
-        model.addAttribute("facilityTypeList", facilityTypeList);
-        List<RentType> rentTypeList = rentTypeService.showList();
-        model.addAttribute("rentTypeList", rentTypeList);
-        return "/views/facility/create";
-    }
-
-    @PostMapping("/creatFacility")
-    public String createFacility(@ModelAttribute("facility") Facility facility) {
-        facilityService.save(facility);
-        return "redirect:/showCreateFacility";
-    }
-
-
-    @GetMapping("/showUpdateFacility/{id}")
-    public String showUpdate(Model model, @PathVariable("id") int id) {
-        Optional<Facility> facility = facilityService.findById(id);
-        model.addAttribute("facility", facility);
-        List<FacilityType> facilityTypeList = facilityTypeService.showList();
-        model.addAttribute("facilityTypeList", facilityTypeList);
-        List<RentType> rentTypeList = rentTypeService.showList();
-        model.addAttribute("rentTypeList", rentTypeList);
-        return "/views/facility/update";
-    }
-
-    @PostMapping("/updateFacility")
-    public String update(@ModelAttribute("facility") Facility facility, RedirectAttributes redirectAttributes) {
-        facilityService.update(facility);
-        redirectAttributes.addFlashAttribute("mess", "Chỉnh sửa thành công");
-        return "redirect:/listFacility";
-    }
 }
