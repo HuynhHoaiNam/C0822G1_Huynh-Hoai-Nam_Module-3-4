@@ -8,7 +8,7 @@ public class Facility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private int area;
+    private double area;
     private double cost;
     private int maxPeople;
     private String standardRoom;
@@ -43,11 +43,11 @@ public class Facility {
         this.name = name;
     }
 
-    public int getArea() {
+    public double getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(double area) {
         this.area = area;
     }
 

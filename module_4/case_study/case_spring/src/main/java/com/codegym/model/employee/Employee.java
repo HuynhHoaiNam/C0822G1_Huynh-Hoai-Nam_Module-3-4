@@ -1,6 +1,7 @@
 package com.codegym.model.employee;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Employee {
@@ -8,7 +9,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String idCard;
     private double salary;
     private String phoneNumber;
@@ -45,11 +46,11 @@ public class Employee {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

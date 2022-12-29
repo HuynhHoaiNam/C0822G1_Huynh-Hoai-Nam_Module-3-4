@@ -1,6 +1,7 @@
 package com.codegym.model.customer;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class Customer {
@@ -8,7 +9,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private boolean gender;
     private String idCard;
     private String phoneNumber;
@@ -38,11 +39,11 @@ public class Customer {
         this.name = name;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

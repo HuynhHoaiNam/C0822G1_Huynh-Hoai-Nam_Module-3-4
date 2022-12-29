@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang chỉnh sửa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+<form th:action="@{/updateFacility}" method="post" th:object="${facility}">
+    <fieldset>
+        <table class="table table-success table-striped container">
+            <tr>
+                <th>Tên dịch vụ:</th>
+                <td><input type="text" th:field="*{name}"></td>
+            </tr>
+            <tr>
+                <th>Loại dịch vụ:</th>
+                <td><select th:field="*{facilityType}">
+                    <option th:each="item :${facilityTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
+                </select></td>
+            </tr>
+            <tr>
+                <th>Kiểu thuê:</th>
+                <td>
+                    <select th:field="*{rentType}">
+                        <option th:each="item :${rentTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Diện tích:</th>
+                <td><input type="text" th:field="*{area}"></td>
+            </tr>
+            <tr>
+                <th>Giá:</th>
+                <td><input type="text" th:field="*{cost}"></td>
+            </tr>
+            <tr>
+                <th>Số người tối đa:</th>
+                <td><input type="number" th:field="*{maxPeople}"></td>
+            </tr>
+            <tr>
+                <th>Loại phòng:</th>
+                <td><input type="text" th:field="*{standardRoom}"></td>
+            </tr>
+            <tr>
+                <th>Mô tả tiện nghi khác:</th>
+                <td><input type="text" th:field="*{descriptionOtherConvenience}"></td>
+            </tr>
+            <tr>
+                <th>Diện tích hồ bơi:</th>
+                <td><input type="text" th:field="*{poolArea}"></td>
+            </tr>
+            <tr>
+                <th>Số tầng:</th>
+                <td><input type="number" th:field="*{numberOfFloors}"></td>
+            </tr>
+            <tr>
+                <th>Dịch vụ miễn phí:</th>
+                <td><input type="text" th:field="*{facilityFree}"></td>
+            </tr>
+
+            <tr>
+                <th></th>
+                <td>
+                    <button type="submit" style="background-color: lightskyblue; margin: auto">Update</button>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+</form>
+</body>
+</html>
