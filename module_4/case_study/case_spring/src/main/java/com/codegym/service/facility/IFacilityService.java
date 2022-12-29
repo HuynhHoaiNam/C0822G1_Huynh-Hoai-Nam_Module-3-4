@@ -9,6 +9,8 @@ import java.util.Optional;
 public interface IFacilityService {
     Page<Facility> showList(Pageable pageable);
 
+    Page<Facility> listAndSearch(Pageable pageable,String name, String facilityId);
+
     void save(Facility facility);
 
     void update(Facility facility);

@@ -23,6 +23,11 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
+    public Page<Facility> listAndSearch(Pageable pageable, String name, String facilityId) {
+        return facilityRepository.listAndSearch(pageable, name, facilityId);
+    }
+
+    @Override
     public void save(Facility facility) {
         facilityRepository.save(facility);
     }

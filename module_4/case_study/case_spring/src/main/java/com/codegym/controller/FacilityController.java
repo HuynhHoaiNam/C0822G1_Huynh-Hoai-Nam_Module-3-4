@@ -28,9 +28,11 @@ public class FacilityController {
     private IFacilityTypeService facilityTypeService;
     @Autowired
     private IRentTypeService rentTypeService;
+
     @GetMapping("/listFacility")
-    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        Page<Facility> facilityPage = facilityService.showList(pageable);
+    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model, @RequestParam(name = "name", defaultValue = "") String name,
+                           @RequestParam(name = "facilityId", defaultValue = "") String facilityId) {
+        Page<Facility> facilityPage = facilityService.listAndSearch(pageable, name, facilityId);
         model.addAttribute("facilityPage", facilityPage);
         List<FacilityType> facilityTypeList = facilityTypeService.showList();
         model.addAttribute("facilityTypeList", facilityTypeList);
@@ -76,9 +78,10 @@ public class FacilityController {
     }
 
     @PostMapping("/deleteFacility")
-    public String delete(@RequestParam("idDelete") int id){
+    public String delete(@RequestParam("idDelete") int id) {
         facilityService.deleteById(id);
         return "redirect:/facility/listFacility";
     }
+
 
 }
