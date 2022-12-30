@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi tiết</title>
+</head>
+<body>
+<div class="card" th:object="i${product}"  style="width: 18rem;">
+    <img th:src="${image}" class="card-img-top" alt="...">
+    <div class="card-body">
+        <p class="card-title" th:text="${product.name}"></p>
+        <p class="card-text" th:text ="${product.code}"></p>
+        <p class="card-text" th:text ="${product.description}"></p>
+        <p class="card-text" th:text ="${product.price}"></p>
+        <a th:href="@{/add/__${product.id}__}">Thêm vào giỏ</a>
+    </div>
+</div>
+</body>
+</html>

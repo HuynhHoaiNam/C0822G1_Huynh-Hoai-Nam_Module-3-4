@@ -1,11 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Trang danh sách sản phẩm</title>
 </head>
 <body>
 <h1>Danh sách sản phẩm</h1>
-
+<div class="card" style="width: 18rem;" th:each="item:${productList}">
+    <img src="https://cdn.hoanghamobile.com/i/productlist/dsp/Uploads/2022/09/08/1111.png" class="card-img-top"
+         alt="Lỗi ảnh">
+    <div class="card-body">
+        <h5 class="card-title" th:text="${item.name}">Iphone 14 Pro Max</h5>
+        <p class="card-text" th:text="${item.price}">Iphone 14 pro max 256GB màu tím mộng mơ</p>
+        <a th:href="@{/detail/__${item.id}__}" class="btn btn-primary">Chi tiết</a>
+    </div>
+</div>
 </body>
 </html>
