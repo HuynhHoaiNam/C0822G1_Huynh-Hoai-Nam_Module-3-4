@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trang danh sách</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+            <form class="d-flex" action="/home/find" method="get">
+                <input class="form-control me-2" type="search" placeholder="Tên bài viết" aria-label="Search"
+                       name="nameTitle">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<!--<div th:insert="~{/layout::navbar}"></div>-->
+<a class="nav-link" href="/showCreate">
+    <button class=" btn btn-success">Thêm mới</button>
+</a>
+
+<a class="nav-link" href="/listCategory">
+    <button class=" btn btn-success">Danh sách danh mục</button>
+</a>
+<p th:text="${mess}"></p>
+<p th:text="${messDelete}"></p>
+<table class="table table-dark table-striped">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tiêu đề</th>
+        <th scope="col">Người tạo</th>
+        <th scope="col">Nội dung</th>
+        <th scope="col">Thể Loại</th>
+        <th>Chức năng</th>
+        <th>Chức năng</th>
+        <th>Thông tin</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog , status : ${blogList.content}">
+        <th scope="row" th:text="${status.count}"></th>
+        <td th:text="${blog.title}">tên</td>
+        <td th:text="${blog.writer}">tác giả</td>
+        <td th:text="${blog.content}">nội dung</td>
+        <td th:text="${blog.category.name}">thể loại</td>
+        <td>
+            <a class="nav-link" th:href="@{/showUpdate/__${blog.id}__}">
+                <button class=" btn btn-primary">Sửa</button>
+            </a>
+        </td>
+
+
+        <!--        XOÁ MODAL-->
+        <td>
+            <button th:onclick="|getInfo('${blog.getId()}')|"
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-toggle="modal"
+                    data-bs-target="#deleteModal">
+                Xoá
+            </button>
+        </td>
+        <td>
+            <a class="nav-link" th:href="@{/detail-blog/__${blog.id}__}">
+                <button class=" btn btn-primary">Chi tiết</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/(page=${blogList.number - 1})}" th:if="${blogList.hasPrevious()}">
+    <button class="btn btn-primary">Back</button>
+</a>
+<span th:text="${blogList.number + 1 + '/' + blogList.totalPages}"></span>
+<a th:href="@{/(page=${blogList.number + 1})}" th:if="${blogList.hasNext()}">
+    <button class="btn btn-primary">Next</button>
+</a>
+
+<!--modal xoá-->
+<div class="modal fade" id="deleteModal" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <form action="/delete" method="post">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Tent</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" name="id" id="idDelete" hidden>
+                    <p>Are you sure want to delete product that has the id of <span id="nameDelete"></span> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+
+<script>
+    function getInfo(id) {
+        document.getElementById("idDelete").value = id;
+        document.getElementById("nameDelete").innerHTML = id;
+    }
+</script>
+</body>
+</html>
