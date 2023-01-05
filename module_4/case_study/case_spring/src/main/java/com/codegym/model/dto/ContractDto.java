@@ -1,28 +1,38 @@
-package com.codegym.model.customer;
+package com.codegym.model.dto;
 
-import javax.persistence.*;
+import com.codegym.model.customer.Customer;
+import com.codegym.model.customer.CustomerType;
+import com.codegym.model.employee.Employee;
+import com.codegym.model.facility.Facility;
+import net.bytebuddy.implementation.bind.annotation.Empty;
 
-@Entity
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+import javax.persistence.Column;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+public class ContractDto {
+
     private int id;
+    @NotEmpty(message = "Không được để trống")
+    @Pattern(regexp = "^([A-Z]*[a-z]*[ ])*([A-Z]*[a-z]*)$", message = "Tên không được chứa số và viết hoa chữ đầu")
     private String name;
+    @NotEmpty(message = "Không được để trống")
     private String dateOfBirth;
+    @NotEmpty(message = "Không được để trống")
     private boolean gender;
-    @Column(unique=true)
+    @NotEmpty(message = "Không được để trống")
+    @Pattern(regexp = "^(\\d{9})$", message = "Căn gồm 9 số và không chứa kí tự")
     private String idCard;
+    @NotEmpty(message = "Không được để trống")
+    @Pattern(regexp = "^(0[\\d]\\d{8})", message = "Số điện thoại gồm 10 số và không chứa kí tự")
     private String phoneNumber;
+    @NotEmpty(message = "Không được để trống")
     private String address;
-    @Column(unique=true)
+    @NotEmpty(message = "Email không được trống")
+    @Pattern(regexp = "\\w+@\\w+.\\w+", message = "Email phải theo quy tắc xxx@xxx.xxx")
     private String email;
-
-    @ManyToOne
-    @JoinColumn(name = "customerType_id", referencedColumnName = "id")
     private CustomerType customerType;
-
-    public Customer() {
-    }
 
     public int getId() {
         return id;

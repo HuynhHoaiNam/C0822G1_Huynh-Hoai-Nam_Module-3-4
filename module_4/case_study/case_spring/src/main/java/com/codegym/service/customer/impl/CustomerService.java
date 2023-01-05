@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,6 +28,18 @@ public class CustomerService implements ICustomerService {
         customerRepository.save(customer);
     }
 
+//    @Override
+//    public boolean save(Customer customer) {
+//
+//        for (int i = 0; i < cusList().size(); i++) {
+//            if (customer.getEmail().equals(cusList().get(i).getName())) {
+//                return false;
+//            }
+//        }
+//        customerRepository.save(customer);
+//        return true;
+//    }
+
     @Override
     public void update(Customer customer) {
         customerRepository.save(customer);
@@ -40,5 +53,15 @@ public class CustomerService implements ICustomerService {
     @Override
     public Optional<Customer> findById(int id) {
         return customerRepository.findById(id);
+    }
+
+    @Override
+    public List<Customer> cusList() {
+        return customerRepository.findAll();
+    }
+
+    @Override
+    public List<Customer> findAll2() {
+        return customerRepository.findAll();
     }
 }

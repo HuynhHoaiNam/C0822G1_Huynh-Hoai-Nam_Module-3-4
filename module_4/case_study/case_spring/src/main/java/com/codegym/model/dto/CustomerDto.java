@@ -1,28 +1,16 @@
-package com.codegym.model.customer;
+package com.codegym.model.dto;
 
-import javax.persistence.*;
 
-@Entity
-public class Customer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CustomerDto {
     private int id;
     private String name;
     private String dateOfBirth;
     private boolean gender;
-    @Column(unique=true)
     private String idCard;
     private String phoneNumber;
     private String address;
-    @Column(unique=true)
     private String email;
 
-    @ManyToOne
-    @JoinColumn(name = "customerType_id", referencedColumnName = "id")
-    private CustomerType customerType;
-
-    public Customer() {
-    }
 
     public int getId() {
         return id;
@@ -86,13 +74,5 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public CustomerType getCustomerType() {
-        return customerType;
-    }
-
-    public void setCustomerType(CustomerType customerType) {
-        this.customerType = customerType;
     }
 }

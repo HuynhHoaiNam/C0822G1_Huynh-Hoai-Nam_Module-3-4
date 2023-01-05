@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("facility")
+@RequestMapping("/facility")
 public class FacilityController {
 
     @Autowired
@@ -29,10 +29,22 @@ public class FacilityController {
     @Autowired
     private IRentTypeService rentTypeService;
 
+//    @GetMapping("/listFacility")
+//    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model, @RequestParam(name = "name", defaultValue = "") String name,
+//                           @RequestParam(name = "facilityId", defaultValue = "") String facilityType) {
+//        Page<Facility> facilityPage = facilityService.listAndSearch(pageable, name, facilityType);
+//        model.addAttribute("facilityPage", facilityPage);
+//        List<FacilityType> facilityTypeList = facilityTypeService.showList();
+//        model.addAttribute("facilityTypeList", facilityTypeList);
+//        List<RentType> rentTypeList = rentTypeService.showList();
+//        model.addAttribute("rentTypeList", rentTypeList);
+//        model.addAttribute("facility", new Facility());
+//        return "/views/facility/list";
+//    }
+
     @GetMapping("/listFacility")
-    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model, @RequestParam(name = "name", defaultValue = "") String name,
-                           @RequestParam(name = "facilityId", defaultValue = "") String facilityId) {
-        Page<Facility> facilityPage = facilityService.listAndSearch(pageable, name, facilityId);
+    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model) {
+        Page<Facility> facilityPage = facilityService.showList(pageable);
         model.addAttribute("facilityPage", facilityPage);
         List<FacilityType> facilityTypeList = facilityTypeService.showList();
         model.addAttribute("facilityTypeList", facilityTypeList);
@@ -53,9 +65,10 @@ public class FacilityController {
     }
 
     @PostMapping("/creatFacility")
-    public String createFacility(@ModelAttribute("facility") Facility facility) {
+    public String createFacility(@ModelAttribute("facility") Facility facility, RedirectAttributes redirectAttributes) {
         facilityService.save(facility);
-        return "redirect:/showCreateFacility";
+        redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
+        return "redirect:/facility/listFacility";
     }
 
 
@@ -74,14 +87,14 @@ public class FacilityController {
     public String update(@ModelAttribute("facility") Facility facility, RedirectAttributes redirectAttributes) {
         facilityService.update(facility);
         redirectAttributes.addFlashAttribute("mess", "Chỉnh sửa thành công");
-        return "redirect:/listFacility";
+        return "redirect:/facility/listFacility";
     }
+
 
     @PostMapping("/deleteFacility")
     public String delete(@RequestParam("idDelete") int id) {
         facilityService.deleteById(id);
         return "redirect:/facility/listFacility";
     }
-
 
 }

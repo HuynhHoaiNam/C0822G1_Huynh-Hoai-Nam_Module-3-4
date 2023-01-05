@@ -9,6 +9,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface IFacilityRepository extends JpaRepository<Facility, Integer> {
 
-    @Query(value = "select * from facility join facility_type ft on ft.id = facility.facility_type_id where ft.name like concat( '%',:nameInput,'%')", nativeQuery = true)
-    Page<Facility> listAndSearch(Pageable pageable, @Param("nameInput") String name, @Param("facilityType") String facilityType);
+
+    @Query(value = "select * from facility join facility_type ft on ft.id = facility.facility_type_id where ft.name like concat('%',:nameInput,'%') and facility.name like concat( '%',:facilityTypeInput,'%')", nativeQuery = true)
+    Page<Facility> listAndSearch(Pageable pageable, @Param("nameInput") String name, @Param("facilityTypeInput") String facilityType);
+
+    @Query(value = "select * from facility ", nativeQuery = true)
+    Page<Facility> list(Pageable pageable);
 }

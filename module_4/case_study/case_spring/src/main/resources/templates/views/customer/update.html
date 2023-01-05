@@ -11,6 +11,9 @@
 </head>
 <body>
 <header th:insert="/views/css/header.html :: header"></header>
+<a th:href="@{/listCustomer}">
+    <button class="btn btn-primary">Back</button>
+</a>
 
 <form action="/updateCustomer" method="post" th:object="${customer}">
     <fieldset>
@@ -28,7 +31,7 @@
 
             <tr>
                 <th>Ngày Sinh:</th>
-                <td><input type="date" th:field="*{dateOfBirth}"></td>
+                <td><input type="text" th:field="*{dateOfBirth}"></td>
             </tr>
             <tr>
                 <th>Giới Tính:</th>

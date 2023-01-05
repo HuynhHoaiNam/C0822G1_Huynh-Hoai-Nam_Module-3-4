@@ -11,11 +11,11 @@
 </head>
 <body>
 <header th:insert="/views/css/header.html :: header"></header>
-<a th:href="@{/}">
+<a th:href="@{/listCustomer}">
     <button class="btn btn-primary">Back</button>
 </a>
 <h3 th:text="${mess}" style="color: red"></h3>
-<form action="/createCustomer" method="post" th:object="${customer}">
+<form action="/createCustomer" method="post" th:object="${customerDto}">
     <table class="table table-success table-striped container">
         <tr>
             <th>Tên Khách Hàng:</th>

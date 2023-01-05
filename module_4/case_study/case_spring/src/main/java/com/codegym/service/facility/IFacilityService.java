@@ -4,12 +4,13 @@ import com.codegym.model.facility.Facility;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IFacilityService {
     Page<Facility> showList(Pageable pageable);
 
-    Page<Facility> listAndSearch(Pageable pageable,String name, String facilityId);
+    Page<Facility> listAndSearch(Pageable pageable, String name, String facilityType);
 
     void save(Facility facility);
 
@@ -19,4 +20,7 @@ public interface IFacilityService {
 
     Optional<Facility> findById(int id);
 
+    List<Facility> findAll();
+
 }
+

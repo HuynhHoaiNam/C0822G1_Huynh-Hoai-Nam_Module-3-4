@@ -49,7 +49,8 @@
             <td th:text="${customer.email}"></td>
             <td>
                 <a class="nav-link" th:href="@{/showUpdateCustomer/__${customer.id}__}">
-                    <button class=" btn btn-primary"><img src="https://img.icons8.com/3d-fluency/94/null/edit.png" style="width: 30px"/></button>
+                    <button class=" btn btn-primary"><img src="https://img.icons8.com/3d-fluency/94/null/edit.png"
+                                                          style="width: 30px"/></button>
                 </a>
             </td>
             <td>
@@ -59,7 +60,8 @@
                         class="btn btn-danger"
                         data-bs-toggle="modal"
                         data-bs-target="#deleteModal">
-                    <img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/null/external-delete-user-interface-wanicon-lineal-color-wanicon.png" style="width: 30px" />
+                    <img src="https://img.icons8.com/external-wanicon-lineal-color-wanicon/64/null/external-delete-user-interface-wanicon-lineal-color-wanicon.png"
+                         style="width: 30px"/>
                 </button>
             </td>
         </tr>
@@ -89,11 +91,11 @@
                 </div>
                 <div class="modal-body">
                     <input type="text" name="idDelete" id="idDelete" hidden>
-                    <p>Bạn chắc chắn muốn xoá <span id="nameDelete"></span> ?</p>
+                    <p>Bạn chắc chắn muốn xoá <span style="color: red" id="nameDelete"></span> ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
+                    <button type="submit" class="btn btn-primary">Xoá</button>
                 </div>
             </div>
         </div>

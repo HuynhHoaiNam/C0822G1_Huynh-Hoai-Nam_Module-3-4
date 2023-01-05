@@ -3,6 +3,7 @@ package com.codegym.controller;
 
 import com.codegym.model.customer.Customer;
 import com.codegym.model.customer.CustomerType;
+import com.codegym.model.dto.CustomerDto;
 import com.codegym.model.facility.Facility;
 import com.codegym.model.facility.FacilityType;
 import com.codegym.model.facility.RentType;
@@ -11,6 +12,7 @@ import com.codegym.service.customer.ICustomerTypeService;
 import com.codegym.service.facility.IFacilityService;
 import com.codegym.service.facility.IFacilityTypeService;
 import com.codegym.service.facility.IRentTypeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +20,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -50,18 +53,20 @@ public class FuramaController {
 
     @GetMapping("/showCreateCustomer")
     public String showCreate(Model model) {
-        model.addAttribute("customer", new Customer());
+        model.addAttribute("customerDto", new CustomerDto());
         List<CustomerType> customerTypeList = customerTypeService.showList();
         model.addAttribute("customerTypeList", customerTypeList);
         return "/views/customer/create";
     }
 
     @PostMapping("/createCustomer")
-    public String create(@ModelAttribute("customer") Customer customer, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String create(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thất bại");
             return "/views/customer/create";
         }
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(customerDto, customer);
         customerService.save(customer);
         redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
         return "redirect:/listCustomer";

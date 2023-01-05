@@ -11,17 +11,17 @@
 </head>
 <body>
 <header th:insert="/views/css/header.html :: header"></header>
-<a th:href="@{/listFacility}">
+<a th:href="@{/facility/listFacility}">
     <button class="btn btn-primary">Back</button>
 </a>
 <h3 th:text="${mess}" style="color: red"></h3>
 
 <form th:action="@{/facility/creatFacility}"
-      th:object="${facility}" method="POST">
+      th:object="${facility}" method="post">
     <div>
         <label for="facilityType">Loại dịch vụ:</label>
         <div>
-            <select id="facilityType" class="form-select" th:field="*{facilityType.id}"
+            <select id="facilityType" class="form-select" th:field="*{facilityType}"
                     onchange="changeForm(this)">
                 <option th:each="item : ${facilityTypeList}" th:value="${item.id}"
                         th:text="${item.name}"></option>
@@ -32,7 +32,7 @@
         <div class="mb-4" id="nameForm" style="display: none">
             <label for="name" >Tên dịch vụ:</label>
             <div >
-                <input type="text" id="name" placeholder="Nhập tên dịch vụ.."
+                <input type="text" id="name" placeholder="Nhập tên dịch vụ"
                        th:field="*{name}" />
             </div>
         </div>
@@ -40,7 +40,7 @@
         <div class="mb-4" id="areaForm" style="display: none">
             <label for="area" >Diện tích sử dụng:</label>
             <div >
-                <input type="number" id="area" class="form-control" placeholder="Nhập diện tích sử dụng.."
+                <input type="number" id="area" class="form-control" placeholder="Nhập diện tích sử dụng"
                        th:field="*{area}"/>
             </div>
         </div>
@@ -103,7 +103,7 @@
         <div class="mb-4" id="rentTypeForm" style="display: none">
             <label  for="rentType">Kiểu thuê:</label>
             <div >
-                <select id="rentType" th:field="*{rentType.id}">
+                <select id="rentType" th:field="*{rentType}">
                     <option th:each="item : ${rentTypeList}" th:value="${item.id}"
                             th:text="${item.name}"></option>
                 </select>
@@ -111,7 +111,7 @@
         </div>
     </div>
     <div class="mb-4 text-center">
-        <button id="save" class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
+        <button type="submit" id="save" class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
             Save
         </button>
     </div>
