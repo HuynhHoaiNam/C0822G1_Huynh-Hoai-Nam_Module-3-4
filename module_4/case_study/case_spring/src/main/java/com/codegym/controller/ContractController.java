@@ -5,6 +5,7 @@ import com.codegym.model.contract.AttachFacility;
 import com.codegym.model.contract.Contract;
 import com.codegym.model.contract.ContractDetail;
 import com.codegym.model.customer.Customer;
+import com.codegym.model.dto.IContractDto;
 import com.codegym.model.employee.Employee;
 import com.codegym.model.facility.Facility;
 import com.codegym.service.contract.IAttachFacilityService;
@@ -14,9 +15,6 @@ import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.emoloyee.IEmployeeService;
 import com.codegym.service.facility.IFacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,10 +40,8 @@ public class ContractController {
 
     @GetMapping("/list")
     public String showList(Model model) {
-        model.addAttribute("contract", new Contract());
-        model.addAttribute("contractDetail", new ContractDetail());
-        List<Contract> contractPage = contractService.listContract();
-        model.addAttribute("contractPage", contractPage);
+        List<IContractDto> contractDtoList = contractService.listContract();
+        model.addAttribute("contractDtoList", contractDtoList);
         List<Customer> customerList = customerService.findAll2();
         model.addAttribute("customerList", customerList);
         List<Facility> facilityList = facilityService.findAll();
@@ -56,6 +52,8 @@ public class ContractController {
         model.addAttribute("attachFacilityList", attachFacilityList);
         List<Employee> employeeList = employeeService.findAll();
         model.addAttribute("employeeList", employeeList);
+        model.addAttribute("contract", new Contract());
+        model.addAttribute("contractDetail", new ContractDetail());
         return "/views/contract/list";
     }
 
@@ -76,7 +74,8 @@ public class ContractController {
     public String show(@PathVariable("id") int id, Model model) {
         List<AttachFacility> attachFacilities = attachFacilityService.findByList(id);
         model.addAttribute("attachFacilities", attachFacilities);
-        return "/views/contract/list";
+        model.addAttribute("openModal", true);
+        return "redirect:/contract/list";
     }
 
 }

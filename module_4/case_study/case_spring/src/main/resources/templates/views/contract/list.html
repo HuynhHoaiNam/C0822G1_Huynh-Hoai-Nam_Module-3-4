@@ -34,28 +34,32 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="contract,status:${contractPage}">
+        <tr th:each="contractDto,status:${contractDtoList}">
             <th scope="row" th:text="${status.count}">1</th>
-            <td th:text="${contract.Facility.name}">Room Twin01</td>
-            <td th:text="${contract.Customer.name}">Nguyễn Thị Hảo</td>
-            <td th:text="${contract.startDate}">08/12/2020</td>
-            <td th:text="${contract.endDate}">08/12/2020</td>
-            <td th:text="${contract.deposit}">0</td>
-            <td>1000000</td>
+            <td th:text="${contractDto.getFacilityName()}">Room Twin01</td>
+            <td th:text="${contractDto.getCustomerName()}">Nguyễn Thị Hảo</td>
+            <td th:text="${contractDto.getStartDate()}"></td>
+            <td th:text="${contractDto.getEndDate()}"></td>
+            <td th:text="${contractDto.getDeposit()}">0</td>
+            <td th:text="${contractDto.getSumMoney()}">1000000</td>
             <td>
                 <!--                Button trigger modal-->
                 <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                        data-bs-target="#staticBackdropDetail2" th:onclick="|getInfo('${contract.id}')|">
+                        data-bs-target="#staticBackdropDetail2"
+                        th:onclick="|getInfo('${contractDto.getId()}','${contractDto.getSumMoney()}')|">
                     +
                 </button>
             </td>
             <td>
                 <!-- Danh Sách Các Dịch Vụ Đi Kèm(màu xanh xanh)-->
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" id="modalDetail"
-                        data-bs-target="#staticBackdropAttach" th:onclick="|getInfoAttach()|">
-                    Danh Sách Các Dịch Vụ Đi Kèm
-                </button>
+                <!-- Button danh sách dịch vụ đi kèm -->
+                <a th:href="@{contract/showAttch/__${contractDto.getId()}__}">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalView">
+                        Danh sách dịch vụ đi kèm
+                    </button>
+                </a>
             </td>
         </tr>
         </tbody>
@@ -74,7 +78,7 @@
 <footer th:insert="/views/css/footer.html :: footer"></footer>
 
 
-<!-- Modal thêm mới -->
+<!-- Modal thêm mới(Tạo Hợp Đồng) -->
 <div class="modal fade staticBackdrop" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -95,7 +99,7 @@
                                                      aria-describedby="addon-wrapping" th:field="*{startDate}"></div>
                     </div>
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
-                        <div class="col-lg-4 text-black">Kết Thúcccccc:</div>
+                        <div class="col-lg-4 text-black">Kết Thúc:</div>
                         <div class="col-lg-8"><input type="text" class="form-control"
                                                      aria-describedby="addon-wrapping" th:field="*{endDate}"></div>
                     </div>
@@ -107,7 +111,7 @@
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
                         <div class="col-lg-4 text-black">Tổng Tiền:</div>
                         <div class="col-lg-8"><input type="text" class="form-control"
-                                                     aria-describedby="addon-wrapping" readonly>1000000
+                                                     aria-describedby="addon-wrapping" readonly>
                         </div>
                     </div>
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
@@ -143,7 +147,7 @@
 </div>
 
 
-<!--modal thêm mới dịch vụ đi kèm-->
+<!--modal thêm mới dịch vụ đi kèm(+)-->
 <div class="modal fade staticBackdrop" id="staticBackdropDetail2" data-bs-backdrop="static" data-bs-keyboard="false"
      tabindex="-1" aria-labelledby="staticBackdropDetail" aria-hidden="true">
     <div class="modal-dialog">
@@ -175,7 +179,14 @@
                                                      aria-describedby="addon-wrapping" th:field="*{quantity}">
                         </div>
                     </div>
+                    <div class="input-group flex-nowrap row" style="margin-top: 25px">
+                        <div class="col-lg-4 text-black">Tổng tiền:</div>
+                        <div class="col-lg-8"><input type="text" class="form-control"
+                                                     aria-describedby="addon-wrapping" readonly id="sumMoneyContract">
+                        </div>
+                    </div>
                 </div>
+
                 <!--                                 Nút Xác Nhận input Thêm Hợp đồng-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Huỷ</button>
@@ -187,11 +198,64 @@
 </div>
 
 
+<!--Modal xem dịch vụ đi kèm-->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Danh sách dịch vụ đi kèm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-dark table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Tên dịch vụ</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Đơn vị</th>
+                    </tr>
+                    </thead>
+                    <tbody id="myBody">
+                    <tr th:each="attach,status:${attachFacilities}">
+                        <th scope="row" th:text="${status.count}">1</th>
+                        <td th:text="${attach.cost}"></td>
+                        <td th:text="${attach.name}"></td>
+                        <td th:text="${attach.status}"></td>
+                        <td th:text="${attach.unit}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!--                <button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!--lấy id contract-->
 <script>
-    function getInfo(id) {
+    function getInfo(id, sumMoney) {
         document.getElementById("idContract").value = id;
         document.getElementById("nameContract").innerHTML = id;
+        document.getElementById("sumMoneyContract").innerHTML = sumMoney;
+    }
+</script>
+<input type="hidden" id="modalCheck" th:value="${openModal}">
+
+<script>
+    let modal = document.getElementById("modalCheck").value;
+    if (modal == 'true') {
+        $(document).ready(function () {
+            $('#exampleModalView').append('myBody').show('modal')
+        });
     }
 </script>
 

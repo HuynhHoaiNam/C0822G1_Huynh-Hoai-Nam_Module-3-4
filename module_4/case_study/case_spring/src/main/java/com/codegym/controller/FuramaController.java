@@ -4,14 +4,9 @@ package com.codegym.controller;
 import com.codegym.model.customer.Customer;
 import com.codegym.model.customer.CustomerType;
 import com.codegym.model.dto.CustomerDto;
-import com.codegym.model.facility.Facility;
-import com.codegym.model.facility.FacilityType;
-import com.codegym.model.facility.RentType;
+import com.codegym.model.dto.CustomerDtod;
 import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.customer.ICustomerTypeService;
-import com.codegym.service.facility.IFacilityService;
-import com.codegym.service.facility.IFacilityTypeService;
-import com.codegym.service.facility.IRentTypeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -60,8 +55,10 @@ public class FuramaController {
     }
 
     @PostMapping("/createCustomer")
-    public String create(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String create(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         if (bindingResult.hasErrors()) {
+            List<CustomerType> customerTypeList = customerTypeService.showList();
+            model.addAttribute("customerTypeList", customerTypeList);
             redirectAttributes.addFlashAttribute("mess", "Thêm mới thất bại");
             return "/views/customer/create";
         }
