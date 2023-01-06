@@ -23,6 +23,11 @@ public class CustomerService implements ICustomerService {
         return customerRepository.showList(name, email, customerType, pageable);
     }
 
+    @Override
+    public Page<Customer> findAllNoId(String name, String email, Pageable pageable) {
+        return customerRepository.showListNoId(name, email,pageable);
+    }
+
 
     @Override
     public boolean save(Customer customer) {

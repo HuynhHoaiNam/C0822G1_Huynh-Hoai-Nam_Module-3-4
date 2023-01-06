@@ -18,6 +18,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.constraints.Null;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,8 +40,16 @@ public class FuramaController {
     public String listCustomer(Model model, @PageableDefault(size = 5) Pageable pageable,
                                @RequestParam(name = "name", defaultValue = "") String name,
                                @RequestParam(name = "email", defaultValue = "") String email,
-                               @RequestParam(name = "customerType", defaultValue = "") String customerType) {
-        Page<Customer> customerPage = customerService.findAll(name, email, customerType, pageable);
+                               @RequestParam(name = "customerType", defaultValue = "null") String customerType) {
+        Page<Customer> customerPage;
+        if (customerType == null) {
+            customerPage = customerService.findAllNoId(name, email, pageable);
+            model.addAttribute("customerPage", customerPage);
+            List<CustomerType> customerTypeList = customerTypeService.showList();
+            model.addAttribute("customerTypeList", customerTypeList);
+            return "/views/customer/list";
+        }
+        customerPage = customerService.findAll(name, email, customerType, pageable);
         model.addAttribute("customerPage", customerPage);
         List<CustomerType> customerTypeList = customerTypeService.showList();
         model.addAttribute("customerTypeList", customerTypeList);
