@@ -23,22 +23,23 @@ public class CustomerService implements ICustomerService {
         return customerRepository.showList(name, address, email, pageable);
     }
 
-    @Override
-    public void save(Customer customer) {
-        customerRepository.save(customer);
-    }
-
 //    @Override
-//    public boolean save(Customer customer) {
-//
-//        for (int i = 0; i < cusList().size(); i++) {
-//            if (customer.getEmail().equals(cusList().get(i).getName())) {
-//                return false;
-//            }
-//        }
+//    public void save(Customer customer) {
 //        customerRepository.save(customer);
-//        return true;
 //    }
+
+    @Override
+    public boolean save(Customer customer) {
+        for (int i = 0; i < cusList().size(); i++) {
+            if (customer.getEmail().equals(cusList().get(i).getEmail()) ||
+                    customer.getIdCard().equals(cusList().get(i).getIdCard()) ||
+                    customer.getPhoneNumber().equals(cusList().get(i).getPhoneNumber())) {
+                return false;
+            }
+        }
+        customerRepository.save(customer);
+        return true;
+    }
 
     @Override
     public void update(Customer customer) {

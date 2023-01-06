@@ -12,7 +12,7 @@ public interface IFacilityService {
 
     Page<Facility> listAndSearch(Pageable pageable, String name, String facilityType);
 
-    void save(Facility facility);
+    boolean save(Facility facility);
 
     void update(Facility facility);
 

@@ -4,7 +4,6 @@ package com.codegym.controller;
 import com.codegym.model.customer.Customer;
 import com.codegym.model.customer.CustomerType;
 import com.codegym.model.dto.CustomerDto;
-import com.codegym.model.dto.CustomerDtod;
 import com.codegym.service.customer.ICustomerService;
 import com.codegym.service.customer.ICustomerTypeService;
 import org.springframework.beans.BeanUtils;
@@ -40,8 +39,8 @@ public class FuramaController {
     public String listCustomer(Model model, @PageableDefault(size = 5) Pageable pageable,
                                @RequestParam(name = "name", defaultValue = "") String name,
                                @RequestParam(name = "address", defaultValue = "") String address,
-                               @RequestParam(name = "email", defaultValue = "") String email) {
-        Page<Customer> customerPage = customerService.findAll(name, address, email, pageable);
+                               @RequestParam(name = "customerType", defaultValue = "") String customerType) {
+        Page<Customer> customerPage = customerService.findAll(name, address, customerType, pageable);
         model.addAttribute("customerPage", customerPage);
         return "/views/customer/list";
     }
@@ -59,13 +58,19 @@ public class FuramaController {
         if (bindingResult.hasErrors()) {
             List<CustomerType> customerTypeList = customerTypeService.showList();
             model.addAttribute("customerTypeList", customerTypeList);
-            redirectAttributes.addFlashAttribute("mess", "Thêm mới thất bại");
             return "/views/customer/create";
         }
+
         Customer customer = new Customer();
         BeanUtils.copyProperties(customerDto, customer);
-        customerService.save(customer);
-        redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
+        boolean check = customerService.save(customer);
+        String mess = "Thêm mới thành công";
+        if (!check) {
+            mess = "Email, Số điện thoại, Căn cước đã tồn tại, thêm mới ko thành công";
+            redirectAttributes.addFlashAttribute("mess", mess);
+            return "/views/customer/create";
+        }
+        redirectAttributes.addFlashAttribute("mess", mess);
         return "redirect:/listCustomer";
     }
 

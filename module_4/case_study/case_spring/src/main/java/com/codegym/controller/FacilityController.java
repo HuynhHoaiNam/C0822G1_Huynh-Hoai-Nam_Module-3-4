@@ -66,8 +66,15 @@ public class FacilityController {
 
     @PostMapping("/creatFacility")
     public String createFacility(@ModelAttribute("facility") Facility facility, RedirectAttributes redirectAttributes) {
-        facilityService.save(facility);
-        redirectAttributes.addFlashAttribute("mess", "Thêm mới thành công");
+
+        boolean check = facilityService.save(facility);
+        String mess = "Thêm mới thành công";
+        if (!check) {
+            mess = "Tên hợp đồng đã tồn tại,Thêm mới thất bại";
+            redirectAttributes.addFlashAttribute("mess", mess);
+            return "/views/facility/create";
+        }
+        redirectAttributes.addFlashAttribute("mess", mess);
         return "redirect:/facility/listFacility";
     }
 

@@ -11,7 +11,7 @@ public interface ICustomerService {
 
     Page<Customer> findAll(String name, String address, String email, Pageable pageable);
 
-    void save(Customer customer);
+    boolean save(Customer customer);
 
     void update(Customer customer);
 
