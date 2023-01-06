@@ -88,9 +88,12 @@
                         <input class="form-control me-2" type="search" placeholder="Tên" aria-label="Search"
                                name="name">
                         <input class="form-control me-2" type="search" placeholder="Địa Chỉ" aria-label="Search"
-                               name="address">
-                        <input class="form-control me-2" type="search" placeholder="Email" aria-label="Search"
-                               name="customerType">
+                               name="email">
+<!--                        <input class="form-control me-2" type="search" placeholder="Email" aria-label="Search"-->
+<!--                               name="customerType">-->
+                        <select name="customerType">
+                            <option th:each="item:${customerTypeList}" th:value="${item.name}" th:text="${item.name}"></option>
+                        </select>
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
                 </div>

@@ -19,14 +19,10 @@ public class CustomerService implements ICustomerService {
 
 
     @Override
-    public Page<Customer> findAll(String name, String address, String email, Pageable pageable) {
-        return customerRepository.showList(name, address, email, pageable);
+    public Page<Customer> findAll(String name, String email, String customerType, Pageable pageable) {
+        return customerRepository.showList(name, email, customerType, pageable);
     }
 
-//    @Override
-//    public void save(Customer customer) {
-//        customerRepository.save(customer);
-//    }
 
     @Override
     public boolean save(Customer customer) {

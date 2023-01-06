@@ -38,10 +38,12 @@ public class FuramaController {
     @GetMapping("/listCustomer")
     public String listCustomer(Model model, @PageableDefault(size = 5) Pageable pageable,
                                @RequestParam(name = "name", defaultValue = "") String name,
-                               @RequestParam(name = "address", defaultValue = "") String address,
+                               @RequestParam(name = "email", defaultValue = "") String email,
                                @RequestParam(name = "customerType", defaultValue = "") String customerType) {
-        Page<Customer> customerPage = customerService.findAll(name, address, customerType, pageable);
+        Page<Customer> customerPage = customerService.findAll(name, email, customerType, pageable);
         model.addAttribute("customerPage", customerPage);
+        List<CustomerType> customerTypeList = customerTypeService.showList();
+        model.addAttribute("customerTypeList", customerTypeList);
         return "/views/customer/list";
     }
 
