@@ -40,7 +40,7 @@ public class FuramaController {
     public String listCustomer(Model model, @PageableDefault(size = 5) Pageable pageable,
                                @RequestParam(name = "name", defaultValue = "") String name,
                                @RequestParam(name = "email", defaultValue = "") String email,
-                               @RequestParam(name = "customerType", defaultValue = "null") String customerType) {
+                               @RequestParam(name = "customerType", defaultValue = "") String customerType) {
         Page<Customer> customerPage;
         if (customerType == null) {
             customerPage = customerService.findAllNoId(name, email, pageable);

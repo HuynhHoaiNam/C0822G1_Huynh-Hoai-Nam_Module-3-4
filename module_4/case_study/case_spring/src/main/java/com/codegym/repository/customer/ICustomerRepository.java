@@ -20,8 +20,8 @@ public interface ICustomerRepository extends JpaRepository<Customer, Integer> {
             "from customer\n" +
             "where name like concat('%', :name, '%')\n" +
             "  and email like concat('%', :email, '%')\n" +
-            "  and customer_type_id = ?;", nativeQuery = true)
-    Page<Customer> showList(@Param("nameInput") String name, @Param("emailInput") String email, @Param("customerNameInput") String customerType, Pageable pageable);
+            "  and customer_type_id = :customerType;", nativeQuery = true)
+    Page<Customer> showList(@Param("name") String name, @Param("email") String email, @Param("customerType") String customerType, Pageable pageable);
 
 
     @Query(value = "select *\n" +

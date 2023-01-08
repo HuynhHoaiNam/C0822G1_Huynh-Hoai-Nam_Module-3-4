@@ -92,6 +92,7 @@
 <!--                        <input class="form-control me-2" type="search" placeholder="Email" aria-label="Search"-->
 <!--                               name="customerType">-->
                         <select name="customerType">
+                            <option selected th:value=""></option>
                             <option th:each="item:${customerTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
                         </select>
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>

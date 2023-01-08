@@ -252,10 +252,12 @@
 
 <script>
     let modal = document.getElementById("modalCheck").value;
-    if (modal == 'true') {
-        $(document).ready(function () {
-            $('#exampleModalView').append('myBody').show('modal')
-        });
+    if (modal == "true") {
+        $(document).ready(
+            function () {
+                $('#exampleModalView').appendTo('body').modal('show')
+            }
+        )
     }
 </script>
 
