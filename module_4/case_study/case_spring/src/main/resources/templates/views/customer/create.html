@@ -38,7 +38,7 @@
         <tr>
             <th>Giới Tính:</th>
             <td>
-                Nam: <input type="radio" size="45" th:field="*{gender}" th:value="true">
+                Nam: <input th:selected="*{gender}" type="radio" size="45" th:field="*{gender}" th:value="true">
                 Nữ : <input type="radio" size="45" th:field="*{gender}" th:value="false">
             </td>
         </tr>

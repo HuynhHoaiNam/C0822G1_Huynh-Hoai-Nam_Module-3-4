@@ -19,7 +19,7 @@ public class CustomerService implements ICustomerService {
 
 
     @Override
-    public Page<Customer> findAll(String name, String email, String customerType, Pageable pageable) {
+    public Page<Customer> findAll(String name, String email, int customerType, Pageable pageable) {
         return customerRepository.showList(name, email, customerType, pageable);
     }
 

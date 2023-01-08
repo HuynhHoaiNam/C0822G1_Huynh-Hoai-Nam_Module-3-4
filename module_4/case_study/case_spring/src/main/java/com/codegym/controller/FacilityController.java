@@ -43,8 +43,14 @@ public class FacilityController {
 //    }
 
     @GetMapping("/listFacility")
-    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model) {
-        Page<Facility> facilityPage = facilityService.showList(pageable);
+    public String showList(@PageableDefault(size = 5) Pageable pageable, Model model, @RequestParam(name = "name", defaultValue = "") String name, @RequestParam(name = "facilityType", defaultValue = "0") int facilityType) {
+
+        Page<Facility> facilityPage;
+        if (facilityType == 0) {
+            facilityPage = facilityService.listAndSearchNoId(pageable, name);
+        } else {
+            facilityPage = facilityService.listAndSearch(pageable, name, facilityType);
+        }
         model.addAttribute("facilityPage", facilityPage);
         List<FacilityType> facilityTypeList = facilityTypeService.showList();
         model.addAttribute("facilityTypeList", facilityTypeList);

@@ -29,8 +29,13 @@ public class FacilityService implements IFacilityService {
     }
 
     @Override
-    public Page<Facility> listAndSearch(Pageable pageable, String name, String facilityType) {
+    public Page<Facility> listAndSearch(Pageable pageable, String name, int facilityType) {
         return facilityRepository.listAndSearch(pageable, name, facilityType);
+    }
+
+    @Override
+    public Page<Facility> listAndSearchNoId(Pageable pageable, String name) {
+        return facilityRepository.listAndSearchNoId(pageable, name);
     }
 
     @Override

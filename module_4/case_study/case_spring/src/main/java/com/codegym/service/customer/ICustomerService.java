@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ICustomerService {
 
-    Page<Customer> findAll(String name, String email, String customerType, Pageable pageable);
+    Page<Customer> findAll(String name, String email, int customerType, Pageable pageable);
     Page<Customer> findAllNoId(String name, String email, Pageable pageable);
 
     boolean save(Customer customer);

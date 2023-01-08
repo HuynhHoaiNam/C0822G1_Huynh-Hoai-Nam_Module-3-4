@@ -88,7 +88,8 @@
                     <form class="d-flex" th:action="@{/facility/listFacility}">
                         <input class="form-control me-2" type="search" placeholder="Tên" aria-label="Search"
                                name="name">
-                        <select>
+                        <select name="facilityType">
+                            <option selected value="">Select One</option>
                             <option th:each="item :${facilityTypeList}" th:value="${item.id}"
                                     th:text="${item.name}"></option>
                         </select>

@@ -33,16 +33,17 @@ public class FuramaController {
 
     @RequestMapping("/")
     public String showHome() {
-        return "/views/home";
+        return "views/home";
     }
 
     @GetMapping("/listCustomer")
     public String listCustomer(Model model, @PageableDefault(size = 5) Pageable pageable,
                                @RequestParam(name = "name", defaultValue = "") String name,
                                @RequestParam(name = "email", defaultValue = "") String email,
-                               @RequestParam(name = "customerType", defaultValue = "") String customerType) {
+                               @RequestParam(name = "customerType", defaultValue = "0") int customerType) {
+
         Page<Customer> customerPage;
-        if (customerType == null) {
+        if (customerType == 0) {
             customerPage = customerService.findAllNoId(name, email, pageable);
             model.addAttribute("customerPage", customerPage);
             List<CustomerType> customerTypeList = customerTypeService.showList();
