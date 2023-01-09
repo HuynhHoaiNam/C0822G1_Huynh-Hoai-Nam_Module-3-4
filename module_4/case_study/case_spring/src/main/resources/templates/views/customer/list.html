@@ -92,7 +92,8 @@
                         <!--                               name="customerType">-->
                         <select name="customerType">
                             <option selected value="">Select One</option>
-                            <option th:each="item:${customerTypeList}" th:value="${item.id}" th:text="${item.name}"></option>
+                            <option th:each="item:${customerTypeList}" th:value="${item.id}"
+                                    th:text="${item.name}"></option>
                         </select>
                         <button class="btn btn-outline-success text-white" type="submit">Search</button>
                     </form>
@@ -157,7 +158,8 @@
         </tr>
         </tbody>
     </table>
-
+</div>
+<div style="text-align: right; align-content: center ; align-items: center">
     <a th:href="@{/listCustomer(page=${customerPage.number - 1})}"
        th:if="${customerPage.hasPrevious()}">
         <button class="btn btn-primary">Back</button>

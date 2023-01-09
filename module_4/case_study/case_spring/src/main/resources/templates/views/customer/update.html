@@ -15,12 +15,14 @@
     <button class="btn btn-primary">Back</button>
 </a>
 
-<form action="/updateCustomer" method="post" th:object="${customer}">
+<form action="/updateCustomer" method="post" th:object="${customerDto}">
     <fieldset>
         <table class="table table-success table-striped container">
+            <input type="hidden" th:field="*{id}">
             <tr>
                 <th>Tên Khách Hàng:</th>
-                <td><input type="text" th:field="*{name}"></td>
+                <td><input type="text" th:field="*{name}">
+                    <p th:errors="*{name}" style="color: red"></p></td>
             </tr>
             <tr>
                 <th>Mã Loại Khách:</th>
@@ -31,7 +33,8 @@
 
             <tr>
                 <th>Ngày Sinh:</th>
-                <td><input type="text" th:field="*{dateOfBirth}"></td>
+                <td><input type="text" th:field="*{dateOfBirth}">
+                    <p th:errors="*{dateOfBirth}" style="color: red"></p></td>
             </tr>
             <tr>
                 <th>Giới Tính:</th>
@@ -42,19 +45,23 @@
             </tr>
             <tr>
                 <th>Số CMND:</th>
-                <td><input type="text" th:field="*{idCard}"></td>
+                <td><input type="text" th:field="*{idCard}">
+                    <p th:errors="*{idCard}" style="color: red"></p></td>
             </tr>
             <tr>
                 <th>Số ĐT:</th>
-                <td><input type="text" th:field="*{phoneNumber}"></td>
+                <td><input type="text" th:field="*{phoneNumber}">
+                    <p th:errors="*{phoneNumber}" style="color: red"></p></td>
             </tr>
             <tr>
                 <th>Email:</th>
-                <td><input type="text" th:field="*{email}"></td>
+                <td><input type="text" th:field="*{email}">
+                    <p th:errors="*{email}" style="color: red"></p></td>
             </tr>
             <tr>
                 <th>Địa Chỉ:</th>
-                <td><input type="text" th:field="*{address}"></td>
+                <td><input type="text" th:field="*{address}">
+                    <p th:errors="*{address}" style="color: red"></p></td>
             </tr>
             <tr>
                 <th></th>

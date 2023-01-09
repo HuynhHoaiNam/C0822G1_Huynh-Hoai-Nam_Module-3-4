@@ -5,23 +5,27 @@ import com.codegym.model.customer.CustomerType;
 import com.codegym.model.employee.Employee;
 import com.codegym.model.facility.Facility;
 import net.bytebuddy.implementation.bind.annotation.Empty;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 
 import javax.persistence.Column;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-public class CustomerDto {
+public class CustomerDto implements Validator {
 
     private int id;
     @NotEmpty(message = "Không được để trống")
     @Pattern(regexp = "^([A-Z]*[a-z]*[ ])*([A-Z]*[a-z]*)$", message = "Tên không được chứa số và viết hoa chữ đầu")
     private String name;
-    @NotEmpty(message = "Không được để trống")
+    @NotBlank(message = "Không được để trống")
+    @Pattern(regexp = "^(((0[1-9]|[12]\\d|3[01])\\/(0[13578]|1[02])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|[12]\\d|30)\\/(0[13456789]|1[012])\\/((19|[2-9]\\d)\\d{2}))|((0[1-9]|1\\d|2[0-8])\\/02\\/((19|[2-9]\\d)\\d{2}))|(29\\/02\\/((1[6-9]|[2-9]\\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$", message = "Nhập đúng định dạng yyyy/mm/dd")
     private String dateOfBirth;
     private boolean gender;
     @NotEmpty(message = "Không được để trống")
-    @Pattern(regexp = "^(\\d{9})$", message = "Căn gồm 9 số và không chứa kí tự")
+    @Pattern(regexp = "^(\\d{9})$", message = "Căn cước gồm 9 số và không chứa kí tự")
     private String idCard;
     @NotEmpty(message = "Không được để trống")
     @Pattern(regexp = "^(0[\\d]\\d{8})", message = "Số điện thoại gồm 10 số và không chứa kí tự")
@@ -103,5 +107,15 @@ public class CustomerDto {
 
     public void setCustomerType(CustomerType customerType) {
         this.customerType = customerType;
+    }
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
     }
 }

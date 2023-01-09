@@ -90,15 +90,30 @@ public class FuramaController {
     @GetMapping("/showUpdateCustomer/{id}")
     public String showUpdateCustomer(Model model, @PathVariable("id") int id) {
         Optional<Customer> customer = customerService.findById(id);
-        model.addAttribute("customer", customer);
+        CustomerDto customerDto = new CustomerDto();
+        BeanUtils.copyProperties(customer.get(), customerDto);
+        model.addAttribute("customerDto", customerDto);
         List<CustomerType> customerTypeList = customerTypeService.showList();
         model.addAttribute("customerTypeList", customerTypeList);
         return "/views/customer/update";
     }
 
     @PostMapping("/updateCustomer")
-    public String updateCustomer(@ModelAttribute("customer") Customer customer) {
-        customerService.update(customer);
+    public String updateCustomer(@Validated @ModelAttribute("customerDto") CustomerDto customerDto, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
+            List<CustomerType> customerTypeList = customerTypeService.showList();
+            model.addAttribute("customerTypeList", customerTypeList);
+            return "/views/customer/update";
+        }
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(customerDto, customer);
+
+        boolean check = customerService.save(customer);
+        String mess = "Thêm mới thành công";
+        if (!check) {
+            mess = "Thêm mới thất bại, thông tin bạn nhập đã có trong hệ thống";
+        }
+        redirectAttributes.addFlashAttribute("mess", mess);
         return "redirect:/listCustomer";
     }
 

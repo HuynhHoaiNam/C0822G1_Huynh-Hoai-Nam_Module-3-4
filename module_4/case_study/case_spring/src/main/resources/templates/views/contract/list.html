@@ -182,7 +182,7 @@
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
                         <div class="col-lg-4 text-black">Tổng tiền:</div>
                         <div class="col-lg-8"><input type="text" class="form-control"
-                                                     aria-describedby="addon-wrapping" readonly id="sumMoneyContract">
+                                                     aria-describedby="addon-wrapping" readonly id="sumMoneyContract" >
                         </div>
                     </div>
                 </div>
@@ -250,15 +250,9 @@
 
 <script src="https://code.jquery.com/jquery-3.6.3.js"
         integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+
 <script>
-    function getInfoAttach(cost, name, status, unit) {
-        document.getElementById("costAtt").value = cost;
-        document.getElementById("nameAtt").value = name;
-        document.getElementById("costAtt").value = status;
-        document.getElementById("unitAtt").value = unit;
-    }
-
-
     function getAttach(id) {
         // debugger
         $.ajax({

@@ -68,4 +68,5 @@ public class FacilityService implements IFacilityService {
     public List<Facility> findAll() {
         return facilityRepository.findAll();
     }
+
 }

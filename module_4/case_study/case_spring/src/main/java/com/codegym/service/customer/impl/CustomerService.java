@@ -25,7 +25,7 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Page<Customer> findAllNoId(String name, String email, Pageable pageable) {
-        return customerRepository.showListNoId(name, email,pageable);
+        return customerRepository.showListNoId(name, email, pageable);
     }
 
 
@@ -66,4 +66,5 @@ public class CustomerService implements ICustomerService {
     public List<Customer> findAll2() {
         return customerRepository.findAll();
     }
+
 }
