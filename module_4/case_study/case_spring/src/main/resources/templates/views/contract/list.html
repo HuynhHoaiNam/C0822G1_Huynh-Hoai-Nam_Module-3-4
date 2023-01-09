@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
+
 </head>
 <body>
 <header th:insert="/views/css/header.html :: header"></header>
@@ -53,8 +54,7 @@
             <td>
                 <!-- Danh Sách Các Dịch Vụ Đi Kèm(màu xanh xanh)-->
 
-                <!-- Button danh sách dịch vụ đi kèm -->
-                <a th:href="@{contract/showAttch/__${contractDto.getId()}__}">
+                <a th:onclick="|getAttach('${contractDto.getId()}')|">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#exampleModalView">
                         Danh sách dịch vụ đi kèm
@@ -199,9 +199,6 @@
 
 
 <!--Modal xem dịch vụ đi kèm-->
-
-
-<!-- Modal -->
 <div class="modal fade" id="exampleModalView" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -214,20 +211,20 @@
                     <thead>
                     <tr>
                         <th scope="col">STT</th>
-                        <th scope="col">Giá</th>
                         <th scope="col">Tên dịch vụ</th>
-                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Giá</th>
                         <th scope="col">Đơn vị</th>
+                        <th scope="col">Trạng thái</th>
                     </tr>
                     </thead>
                     <tbody id="myBody">
-                    <tr th:each="attach,status:${attachFacilities}">
-                        <th scope="row" th:text="${status.count}">1</th>
-                        <td th:text="${attach.cost}"></td>
-                        <td th:text="${attach.name}"></td>
-                        <td th:text="${attach.status}"></td>
-                        <td th:text="${attach.unit}"></td>
-                    </tr>
+                    <!--                    <tr th:each="attach,status:${attachFacilities}">-->
+                    <!--                        <th scope="row" th:text="${status.count}">1</th>-->
+                    <!--                        <td th:text="${attach.cost}"></td>-->
+                    <!--                        <td th:text="${attach.name}"></td>-->
+                    <!--                        <td th:text="${attach.status}"></td>-->
+                    <!--                        <td th:text="${attach.unit}"></td>-->
+                    <!--                    </tr>-->
                     </tbody>
                 </table>
             </div>
@@ -240,7 +237,7 @@
 </div>
 
 
-<!--lấy id contract-->
+<!--lấy id contract để xoá-->
 <script>
     function getInfo(id, sumMoney) {
         document.getElementById("idContract").value = id;
@@ -248,19 +245,11 @@
         document.getElementById("sumMoneyContract").innerHTML = sumMoney;
     }
 </script>
-<input type="hidden" id="modalCheck" th:value="${openModal}">
 
-<script>
-    let modal = document.getElementById("modalCheck").value;
-    if (modal == "true") {
-        $(document).ready(
-            function () {
-                $('#exampleModalView').appendTo('body').modal('show')
-            }
-        )
-    }
-</script>
 
+
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script>
     function getInfoAttach(cost, name, status, unit) {
         document.getElementById("costAtt").value = cost;
@@ -268,9 +257,39 @@
         document.getElementById("costAtt").value = status;
         document.getElementById("unitAtt").value = unit;
     }
+
+
+    function getAttach(id) {
+        // debugger
+        $.ajax({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            type: 'GET',
+            data: 'JSON',
+            url: '/attach/showAttch/' + id,
+            success: function (data) {
+                let table = '';// lưu trữ table
+                for (let i = 0; i < data.length; i++) {
+                    table +=
+                        `
+                        <tr>
+                            <th scope="row">${i + 1}</th>
+                            <td>${data[i].name}</td>
+                            <td>${data[i].cost}</td>
+                            <td>${data[i].unit}</td>
+                            <td>${data[i].status}</td>
+                        </tr>
+                        `
+                }
+                $('#myBody').empty();//dữ liệu trên modal ko bị lặp khi click lần 2
+                $('#myBody').append(table)
+            }
+        });
+    }
 </script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
 </body>
 </html>

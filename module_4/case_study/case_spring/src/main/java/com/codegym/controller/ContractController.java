@@ -70,12 +70,4 @@ public class ContractController {
         return "redirect:/contract/list";
     }
 
-    @GetMapping("/showAttch/{id}")
-    public String show(@PathVariable("id") int id, Model model) {
-        List<AttachFacility> attachFacilities = attachFacilityService.findByList(id);
-        model.addAttribute("attachFacilities", attachFacilities);
-        model.addAttribute("openModal", true);
-        return "redirect:/contract/list";
-    }
-
 }

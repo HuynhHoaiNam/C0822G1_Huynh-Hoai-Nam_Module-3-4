@@ -15,6 +15,7 @@
 <form action="/facility/updateFacility" method="post" th:object="${facility}">
     <fieldset>
         <table class="table table-success table-striped container">
+            <input hidden type="text" th:field="*{id}">
             <tr>
                 <th>Tên dịch vụ:</th>
                 <td><input type="text" th:field="*{name}"></td>

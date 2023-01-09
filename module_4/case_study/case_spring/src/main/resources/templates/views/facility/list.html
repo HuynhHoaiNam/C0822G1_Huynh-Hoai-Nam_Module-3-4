@@ -79,9 +79,11 @@
                         </a>
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
-                        <button type="button" class="btn btn-info">
-                            <a>Hợp Đồng</a>
-                        </button>
+                        <a th:href="@{/contract/list}">
+                            <button type="button" class="btn btn-info">
+                                <a>Hợp Đồng</a>
+                            </button>
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-3">
@@ -157,15 +159,15 @@
         </tr>
         </tbody>
     </table>
-<!--    &lt;!&ndash;Phân trang&ndash;&gt;-->
-<!--    <a th:href="@{/facility/listFacility(page=${facPage.number - 1})}"-->
-<!--       th:if="${facPage.hasPrevious()}">-->
-<!--        <button class="btn btn-primary">Back</button>-->
-<!--    </a>-->
-<!--    <span th:text="${facPage.number + 1 + '/' + facPage.totalPages}"></span>-->
-<!--    <a th:href="@{/facility/listFacility(page=${facPage.number + 1})}" th:if="${facPage.hasNext()}">-->
-<!--        <button class="btn btn-primary">Next</button>-->
-<!--    </a>-->
+    <!--    &lt;!&ndash;Phân trang&ndash;&gt;-->
+    <!--    <a th:href="@{/facility/listFacility(page=${facPage.number - 1})}"-->
+    <!--       th:if="${facPage.hasPrevious()}">-->
+    <!--        <button class="btn btn-primary">Back</button>-->
+    <!--    </a>-->
+    <!--    <span th:text="${facPage.number + 1 + '/' + facPage.totalPages}"></span>-->
+    <!--    <a th:href="@{/facility/listFacility(page=${facPage.number + 1})}" th:if="${facPage.hasNext()}">-->
+    <!--        <button class="btn btn-primary">Next</button>-->
+    <!--    </a>-->
 </div>
 <footer th:insert="/views/css/footer.html :: footer"></footer>
 
@@ -203,6 +205,7 @@
         document.getElementById("idDelete").value = id;
         document.getElementById("nameDelete").innerHTML = id;
     }
+
 </script>
 </body>
 </html>
