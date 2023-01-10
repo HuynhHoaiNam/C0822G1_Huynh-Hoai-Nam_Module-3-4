@@ -14,32 +14,33 @@
 <a th:href="@{/facility/listFacility}">
     <button class="btn btn-primary">Back</button>
 </a>
-<h3 th:text="${mess}" style="color: red"></h3>
+<h3 th:text="${mess}" style="color: red; text-align: center"></h3>
 
 <form th:action="@{/facility/creatFacility}"
       th:object="${facilityDto}" method="post">
-    <div>
-        <label for="facilityType">Loại dịch vụ:</label>
-        <div>
+    <div class="container">
+
+
+        <div class="mb-2">
+            <label for="facilityType">Loại dịch vụ:</label>
             <select id="facilityType" class="form-select" th:field="*{facilityType}"
                     onchange="changeForm(this)">
-                <option selected value=""></option>
+                <option selected th:value="0"></option>
                 <option th:each="item : ${facilityTypeList}" th:value="${item.id}"
                         th:text="${item.name}"></option>
             </select>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-4" id="nameForm" style="display: none">
+
+        <div class="mb-2" id="nameForm" style="display: none">
             <label for="name">Tên dịch vụ:</label>
             <div>
                 <input type="text" id="name" placeholder="Nhập tên dịch vụ"
-                       th:field="*{name}"/>
+                       th:field="*{name}" class="form-control"/>
                 <p style="color: red" th:errors="*{name}"></p>
             </div>
         </div>
 
-        <div class="mb-4" id="areaForm" style="display: none">
+        <div class="mb-2" id="areaForm" style="display: none">
             <label for="area">Diện tích sử dụng:</label>
             <div>
                 <input type="number" id="area" class="form-control" placeholder="Nhập diện tích sử dụng"
@@ -48,7 +49,8 @@
             </div>
         </div>
 
-        <div class="mb-4 " id="costForm" style="display: none">
+
+        <div class="mb-2 " id="costForm" style="display: none">
             <label for="cost">Chi phí thuê (VNĐ):</label>
             <div>
                 <input type="number" id="cost" class="form-control" placeholder="Nhập chi phí thuê.."
@@ -57,7 +59,8 @@
             </div>
         </div>
 
-        <div class="mb-4 " id="maxPeopleForm" style="display: none">
+
+        <div class="mb-2 " id="maxPeopleForm" style="display: none">
             <label for="maxPeople">Số người tối đa:</label>
             <div>
                 <input type="number" id="maxPeople" class="form-control" placeholder="Nhập số người tối đa.."
@@ -65,7 +68,8 @@
                 <p style="color: red" th:errors="*{maxPeople}"></p>
             </div>
         </div>
-        <div class="mb-4 " id="standardRoomForm" style="display: none">
+
+        <div class="mb-2 " id="standardRoomForm" style="display: none">
             <label for="standardRoom">Tiêu chuẩn phòng:</label>
             <div>
                 <input type="text" id="standardRoom" class="form-control" placeholder="Nhập tiêu chuẩn phòng.."
@@ -73,9 +77,8 @@
                 <p style="color: red" th:errors="*{standardRoom}"></p>
             </div>
         </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-4" id="descriptionForm" style="display: none">
+
+        <div class="mb-2" id="descriptionForm" style="display: none">
             <label for="description">Mô tả tiện nghi khác:</label>
             <div>
                 <input type="text" id="description" class="form-control" placeholder="Nhập mô tả tiện nghi khác.."
@@ -84,7 +87,7 @@
             </div>
         </div>
 
-        <div class="mb-4 " id="poolAreaForm" style="display: none">
+        <div class="mb-2 " id="poolAreaForm" style="display: none">
             <label for="poolArea">Diện tích hồ bơi (m<sup>2</sup>):</label>
             <div>
                 <input type="number" id="poolArea" class="form-control" placeholder="Nhập diện tích hồ bơi.."
@@ -93,7 +96,7 @@
             </div>
         </div>
 
-        <div class="mb-4 " id="numberOfFloorsForm" style="display: none">
+        <div class="mb-2 " id="numberOfFloorsForm" style="display: none">
             <label for="numberOfFloors">Số tầng:</label>
             <div>
                 <input type="number" id="numberOfFloors" class="form-control" placeholder="Nhập số tầng.."
@@ -102,7 +105,7 @@
             </div>
         </div>
 
-        <div class="mb-4 " id="facilityFreeForm" style="display: none">
+        <div class="mb-2 " id="facilityFreeForm" style="display: none">
             <label for="facilityFree">Dịch vụ miễn phí đi kèm:</label>
             <div>
                 <input type="text" id="facilityFree" class="form-control"
@@ -110,21 +113,23 @@
                 <p style="color: red" th:errors="*{facilityFree}"></p>
             </div>
         </div>
-        <div class="mb-4" id="rentTypeForm" style="display: none">
+
+        <div class="mb-2" id="rentTypeForm" style="display: none">
             <label for="rentType">Kiểu thuê:</label>
             <div>
-                <select id="rentType" th:field="*{rentType}">
+                <select id="rentType" th:field="*{rentType}" class="form-select">
                     <option th:each="item : ${rentTypeList}" th:value="${item.id}"
                             th:text="${item.name}"></option>
                 </select>
             </div>
         </div>
-    </div>
-    <div class="mb-4 text-center">
-        <button type="submit" id="save"
-                class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
-            Save
-        </button>
+
+        <div class="mb-2 text-center " style="text-align: center; align-content: center ; align-items: center">
+            <button type="submit" id="save"
+                    class="btn btn-info btn-outline-success btn-sm border border-2 border-success text-dark">
+                Save
+            </button>
+        </div>
     </div>
 </form>
 
@@ -174,7 +179,7 @@
                 document.getElementById("rentTypeForm").style.display = "block";
                 document.getElementById("save").style.display = "block";
                 break
-            default:
+            case 0:
                 document.getElementById("standardRoomForm").style.display = "block";
                 document.getElementById("descriptionForm").style.display = "block";
                 document.getElementById("poolAreaForm").style.display = "block";

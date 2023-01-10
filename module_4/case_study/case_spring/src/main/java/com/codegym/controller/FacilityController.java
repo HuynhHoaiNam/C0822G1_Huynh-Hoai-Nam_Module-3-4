@@ -81,6 +81,7 @@ public class FacilityController {
             model.addAttribute("facilityTypeList", facilityTypeList);
             List<RentType> rentTypeList = rentTypeService.showList();
             model.addAttribute("rentTypeList", rentTypeList);
+            redirectAttributes.addFlashAttribute("mess","Thông tin chưa đúng, vui lòng kiêm tra lại");
             return "/views/facility/create";
         }
 
@@ -119,6 +120,7 @@ public class FacilityController {
             model.addAttribute("facilityTypeList", facilityTypeList);
             List<RentType> rentTypeList = rentTypeService.showList();
             model.addAttribute("rentTypeList", rentTypeList);
+            redirectAttributes.addFlashAttribute("mess","Thông tin chưa đúng, vui lòng kiêm tra lại");
             return "/views/facility/update";
         }
         Facility facility = new Facility();
