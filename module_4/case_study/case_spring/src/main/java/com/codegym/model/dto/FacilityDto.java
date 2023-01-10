@@ -15,6 +15,7 @@ public class FacilityDto implements Validator {
     private String name;
     @NotNull(message = "Không được để trống or tất cả các kí tự là khoảng trắng")
     @Min(value = 0, message = "Diện tích phải lớn hơn 0")
+//    ^\d+$(số dương)
     private double area;
     @NotNull(message = "Không được để trống or tất cả các kí tự là khoảng trắng")
     @Min(value = 0, message = "Giá phải là số nguyên dương")

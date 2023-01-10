@@ -1,5 +1,7 @@
 package com.codegym.model.employee;
 
+import com.codegym.model.user.User;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -25,6 +27,10 @@ public class Employee {
     @ManyToOne
     @JoinColumn(name = "division_id", referencedColumnName = "id")
     private Division division;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
 
     public Employee() {
