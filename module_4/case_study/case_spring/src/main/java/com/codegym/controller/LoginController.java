@@ -10,4 +10,10 @@ public class LoginController {
     public String login() {
         return "/views/css/loginPage";
     }
+
+    @GetMapping("/logoutPage")
+    public String logout() {
+        return "/views/home";
+    }
+
 }

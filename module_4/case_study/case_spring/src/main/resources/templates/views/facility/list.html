@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Trang danh sách dịch vụ</title>
@@ -36,7 +37,20 @@
                     <p style="text-align: center; margin: 0">84-236-3847 333/888 <br>reservation@furamavietnam.com</p>
                 </div>
                 <div class="info col-lg-2">
-                    <p style="margin: 0">Nguyễn Văn A</p>
+                    <p style="margin: 0">User<img style="width: 50px"
+                                                  src="https://img.icons8.com/ios-glyphs/60/null/user--v1.png"/></p>
+                    <a sec:authorize="isAnonymous()" href="/loginPage">
+                        <button type="button" class="btn btn-outline-success">Login<img
+                                style="width: 25px"
+                                src="https://img.icons8.com/fluency/48/null/enter-2.png"/></button>
+                    </a>
+                    <span>
+                          <a sec:authorize="!isAnonymous()" href="/loginPage">
+                        <button type="button" class="btn btn-outline-success">LogOut<img
+                                style="width: 25px"
+                                src="https://img.icons8.com/color/96/null/logout-rounded--v1.png"/></button>
+                    </a>
+                    </span>
                 </div>
             </div>
         </div>
@@ -80,9 +94,7 @@
                     </div>
                     <div class="btn-group" style="margin-left: 30px">
                         <a th:href="@{/contract/list}">
-                            <button type="button" class="btn btn-info">
-                                <a>Hợp Đồng</a>
-                            </button>
+                            <button type="button" class="btn btn-info">Hợp Đồng</button>
                         </a>
                     </div>
                 </div>

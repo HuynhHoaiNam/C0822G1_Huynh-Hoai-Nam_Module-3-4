@@ -75,7 +75,6 @@
     <!--        <button class="btn btn-primary">Next</button>-->
     <!--    </a>-->
 </div>
-<footer th:insert="/views/css/footer.html :: footer"></footer>
 
 
 <!-- Modal thêm mới(Tạo Hợp Đồng) -->
@@ -83,7 +82,7 @@
      tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form th:action="@{/contract/create}" th:object="${contract}" method="post">
+            <form th:action="@{/contract/create}" th:object="${contractDto}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title text-black" id="staticBackdropLabel">Yêu Cầu Thêm Mới Hợp
                         Đồng</h5>
@@ -95,18 +94,23 @@
                 <div class="modal-body col-lg-12">
                     <div class="input-group flex-nowrap row">
                         <div class="col-lg-4 text-black">Ngày Bắt Đầu:</div>
-                        <div class="col-lg-8"><input type="text" class="form-control"
-                                                     aria-describedby="addon-wrapping" th:field="*{startDate}"></div>
+                        <div class="col-lg-8"><input type="date" class="form-control"
+                                                     aria-describedby="addon-wrapping" th:field="*{startDate}">
+                            <p style="color: red" th:errors="*{startDate}"></p>
+                        </div>
                     </div>
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
                         <div class="col-lg-4 text-black">Kết Thúc:</div>
-                        <div class="col-lg-8"><input type="text" class="form-control"
-                                                     aria-describedby="addon-wrapping" th:field="*{endDate}"></div>
+                        <div class="col-lg-8"><input type="date" class="form-control"
+                                                     aria-describedby="addon-wrapping" th:field="*{endDate}">
+                            <p style="color: red" th:errors="*{endDate}"></p>
+                        </div>
                     </div>
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
                         <div class="col-lg-4 text-black">Tiền Gửi:</div>
                         <div class="col-lg-8"><input type="text" class="form-control"
-                                                     aria-describedby="addon-wrapping" th:field="*{deposit}"></div>
+                                                     aria-describedby="addon-wrapping" th:field="*{deposit}">
+                            <p style="color: red" th:errors="*{deposit}"></p></div>
                     </div>
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
                         <div class="col-lg-4 text-black">Tổng Tiền:</div>
@@ -182,7 +186,7 @@
                     <div class="input-group flex-nowrap row" style="margin-top: 25px">
                         <div class="col-lg-4 text-black">Tổng tiền:</div>
                         <div class="col-lg-8"><input type="text" class="form-control"
-                                                     aria-describedby="addon-wrapping" readonly id="sumMoneyContract" >
+                                                     aria-describedby="addon-wrapping" readonly id="sumMoneyContract">
                         </div>
                     </div>
                 </div>
@@ -235,24 +239,34 @@
         </div>
     </div>
 </div>
-
-
-<!--lấy id contract để xoá-->
+<footer th:insert="/views/css/footer.html :: footer"></footer>
+<input id="flag"  th:value="${flag}" type="hidden"/>
+<script src="https://code.jquery.com/jquery-3.6.3.js"
+        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script>
     function getInfo(id, sumMoney) {
+        <!--lấy id contract để xoá-->
+
         document.getElementById("idContract").value = id;
         document.getElementById("nameContract").innerHTML = id;
         document.getElementById("sumMoneyContract").innerHTML = sumMoney;
     }
-</script>
+
+    // debugger
+    let flagOpen = document.getElementById("flag").value;
+
+    console.log(flagOpen);
+    $(document).ready(function () {
+        if ($('#flag').val() === 'true') {
+            $('#staticBackdrop').modal('show');
+        }
+    })
+    //       $(document).ready({
+    //           if (flagOpen == 'true') {
+    //           $('#staticBackdrop').modal('show');
+    // }})
 
 
-
-<script src="https://code.jquery.com/jquery-3.6.3.js"
-        integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-
-
-<script>
     function getAttach(id) {
         // debugger
         $.ajax({
@@ -283,6 +297,9 @@
         });
     }
 </script>
+
+
+
 
 
 </body>
